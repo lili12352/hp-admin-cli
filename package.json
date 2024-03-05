@@ -1,0 +1,39 @@
+{
+  "name": "admin-cli",
+  "version": "0.0.0",
+  "description": "一款能根据需求自动配置vue后台管理的脚手架",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clear": "rimraf build",
+    "build": "npm run clear && tsc"
+  },
+  "bin": {
+    "admin-cli-test": "index.js"
+  },
+  "author": {
+    "name": "lhp",
+    "email": "359664577@qq.com",
+    "url": "https://gitee.com/lhp-2023/admin-cli"
+  },
+  "bugs": "https://gitee.com/lhp-2023/admin-cli/issues",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "ejs": "^3.1.9",
+    "execa": "^8.0.1",
+    "figlet": "^1.7.0",
+    "fs-extra": "^11.2.0",
+    "globby": "^14.0.1",
+    "handlebars": "^4.7.8",
+    "inquirer": "^9.2.15",
+    "module-alias": "^2.2.3",
+    "ora": "^8.0.1",
+    "pacote": "^17.0.6"
+  }
+}
