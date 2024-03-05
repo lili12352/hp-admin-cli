@@ -1,6 +1,6 @@
 {
-  "name": "admin-cli",
-  "version": "0.0.0",
+  "name": "hp-admin-cli",
+  "version": "0.0.2",
   "description": "一款能根据需求自动配置vue后台管理的脚手架",
   "main": "index.js",
   "type": "module",
@@ -10,14 +10,25 @@
     "build": "npm run clear && tsc"
   },
   "bin": {
-    "admin-cli-test": "index.js"
+    "admin-cli": "index.js",
+    "admin-cli-dev": "index.js"
   },
+  "keywords": [
+    "vue",
+    "admin",
+    "自动构建",
+    "后台管理",
+    "脚手架",
+    "多版本"
+  ],
   "author": {
     "name": "lhp",
     "email": "359664577@qq.com",
-    "url": "https://gitee.com/lhp-2023/admin-cli"
+    "url": "https://github.com/lili12352/hp-admin-cli"
   },
-  "bugs": "https://gitee.com/lhp-2023/admin-cli/issues",
+  "bugs": "https://github.com/lili12352/hp-admin-cli/issues",
+  "repository": "https://github.com/lili12352/hp-admin-cli",
+  "homepage": "https://github.com/lili12352/hp-admin-cli",
   "license": "ISC",
   "devDependencies": {
     "rimraf": "^5.0.5"
