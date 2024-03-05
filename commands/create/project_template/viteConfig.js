@@ -1,11 +1,38 @@
 import { getJavaScriptFileSuffix } from "../utils/index.js";
 const replacement = () => {
-    return '`${pathResolve("src")}/`';
+  return '`${pathResolve("src")}/`';
 };
-const createViteConfig = () => {
-    return `import { defineConfig } from 'vite'
+const ui = (type) => {
+  let plugins = ''
+  let importStr = ''
+  switch (type) {
+    case "element":
+      plugins = `
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      })`
+      importStr = `import AutoImport from 'unplugin-auto-import/vite'
+      import Components from 'unplugin-vue-components/vite'
+      import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'`
+      break
+    case "antdv":
+      break
+    default:
+      return
+  }
+  return {
+    importStr,
+    plugins
+  }
+}
+const createViteConfig = (params) => {
+  const { projectName, answers } = params;
+  return `import { defineConfig } from 'vite'
     import vue from '@vitejs/plugin-vue'
-
+    ${ui(answers.ui).importStr}
     import { resolve } from "path";
     const root = process.cwd();
     function pathResolve(dir) {
@@ -13,7 +40,10 @@ const createViteConfig = () => {
     }
     // https://vitejs.dev/config/
     export default defineConfig({
-      plugins: [vue()],
+      plugins: [
+        vue(),
+        ${ui(answers.ui).plugins}
+      ],
       resolve: {
         extensions: [
           ".mjs",
@@ -27,7 +57,7 @@ const createViteConfig = () => {
         ],
         alias: [
           {
-            find: ${String.raw `/\@\//`} ,
+            find: ${String.raw`/\@\//`} ,
             replacement: ${replacement()},
           },
         ],
@@ -36,9 +66,9 @@ const createViteConfig = () => {
     `;
 };
 const createFileName = (variant) => {
-    return `vite.config.${getJavaScriptFileSuffix(variant)}`;
+  return `vite.config.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {
-    createFileName: createFileName,
-    createTemplate: createViteConfig,
+  createFileName: createFileName,
+  createTemplate: createViteConfig,
 };

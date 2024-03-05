@@ -4,58 +4,28 @@ import chalk from "chalk";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { createFolder } from "../../utils/index.js";
+import { questionsList } from "./utils/questionList.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 // type： input, number, confirm, list, checkbox ...
-const questionsList = [
-    {
-        type: "input",
-        name: "version",
-        message: "please enter the project version",
-        default: "0.0.0",
-        validate: (value) => {
-            const str = value.split(".");
-            if (str.length !== 3)
-                return "input format(0.0.0)";
-            const flag = str.every((currentValue) => Number(currentValue) >= 0);
-            if (!flag)
-                return "please number";
-            return flag;
-        },
-    },
-    {
-        type: "list",
-        name: "variant", // key 名
-        message: "Select a variant",
-        choices: [
-            {
-                name: "TypeScript",
-                value: "TypeScript",
-            },
-            {
-                name: "javaScript",
-                value: "javaScript",
-            },
-        ],
-    },
-];
+
 const userQuestions = (projectName) => {
     inquirer
         .prompt(questionsList)
         .then((answers) => {
-        createTemplates(projectName, answers);
-    })
+            createTemplates(projectName, answers);
+        })
         .catch((error) => {
-        if (error.isTtyError) {
-            // Prompt couldn't be rendered in the current environment
-        }
-        else {
-            // Something else went wrong
-        }
-    });
+            if (error.isTtyError) {
+                // Prompt couldn't be rendered in the current environment
+            }
+            else {
+                // Something else went wrong
+            }
+        });
 };
 const projectWriteFile = (importFilePath, projectName, answers) => {
-    const {} = answers;
+    const { } = answers;
     const cwdUrl = process.cwd();
     import(importFilePath).then((data) => {
         const { createFileName, createTemplate } = data.default;
@@ -72,11 +42,11 @@ const projectWriteFile = (importFilePath, projectName, answers) => {
         };
         createFolder(path)
             .then(() => {
-            writeFile();
-        })
+                writeFile();
+            })
             .catch(() => {
-            writeFile();
-        });
+                writeFile();
+            });
     });
 };
 const readFile = (destUrl, importFilePath, projectName, answers) => {
@@ -101,12 +71,12 @@ const readFile = (destUrl, importFilePath, projectName, answers) => {
                         // 文件夹如果不存在则创建
                         createFolder(path)
                             .then(() => {
-                            //递归，如果是文件夹，就继续遍历该文件夹下面的文件
-                            readFile(join(destUrl, file), `${importFilePath}/${file}`, `${projectName}/${file}`, answers);
-                        })
+                                //递归，如果是文件夹，就继续遍历该文件夹下面的文件
+                                readFile(join(destUrl, file), `${importFilePath}/${file}`, `${projectName}/${file}`, answers);
+                            })
                             .catch(() => {
-                            readFile(join(destUrl, file), `${importFilePath}/${file}`, `${projectName}/${file}`, answers);
-                        });
+                                readFile(join(destUrl, file), `${importFilePath}/${file}`, `${projectName}/${file}`, answers);
+                            });
                     }
                 }
             });
@@ -121,11 +91,11 @@ const action = (projectName) => {
     const cwdUrl = process.cwd();
     createFolder(join(cwdUrl, projectName))
         .then(() => {
-        userQuestions(projectName);
-    })
+            userQuestions(projectName);
+        })
         .catch(() => {
-        console.log(chalk.red(`项目名可能已存在，请更换项目名或者删除文件夹${projectName}`));
-    });
+            console.log(chalk.red(`项目名可能已存在，请更换项目名或者删除文件夹${projectName}`));
+        });
 };
 export default {
     command: "create <registry-name> ",

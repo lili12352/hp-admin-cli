@@ -25,7 +25,7 @@ admin-cli create <name>
 
 - 框架技术自提
   - [x] 语言选择： typeScript or javaScript
-  - [ ] ui库选择 ：element Plus or Ant Design
+  - [x] ui库选择 ：element Plus or Ant Design
   - [ ] css扩展语言选择: less or scss
   - [ ] 代码规范:eslint 和Prettier
 - 框架模块自提

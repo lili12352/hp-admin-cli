@@ -1,23 +1,42 @@
 import { getJavaScriptFileSuffix } from "../../utils/index.js";
+const ui = (type) => {
+  let importStr = ''
+  let use = ''
+  switch (type) {
+    case "antdv":
+      importStr = `import Antd from 'ant-design-vue';
+      import 'ant-design-vue/dist/reset.css';`
+      use = `app.use(Antd)`
+      break
+    default:
+      return
+  }
+  return {
+    importStr,
+    use
+  }
+
+}
 const createMain = (params) => {
-    return `import { createApp } from "vue";
+  const { projectName, answers } = params;
+  return `import { createApp } from "vue";
   import "./style.css";
   import App from "./App.vue";
   import router from "@/router";
-  
+  ${ui(answers.ui).importStr}
   const app = createApp(App);
   
   app.use(router);
-  
+  ${ui(answers.ui).use}
   router.isReady().then(() => {
     app.mount("#app");
   });
    `;
 };
 const createFileName = (variant) => {
-    return `main.${getJavaScriptFileSuffix(variant)}`;
+  return `main.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {
-    createFileName: createFileName,
-    createTemplate: createMain,
+  createFileName: createFileName,
+  createTemplate: createMain,
 };
