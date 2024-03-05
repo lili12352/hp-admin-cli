@@ -9,7 +9,7 @@ const ui = (type) => {
       use = `app.use(Antd)`
       break
     default:
-      return
+      break
   }
   return {
     importStr,
@@ -33,7 +33,8 @@ const createMain = (params) => {
   });
    `;
 };
-const createFileName = (variant) => {
+const createFileName = (params) => {
+  const { variant } = params
   return `main.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {

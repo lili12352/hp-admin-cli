@@ -32,6 +32,16 @@ const ui = (type) => {
   }
 }
 
+const css = (type) => {
+  if (type === "scss") {
+    return `"sass": "^1.71.1",
+    "sass-loader": "^14.1.1"`
+  } else {
+    return `"less": "^4.2.0"`
+  }
+
+}
+
 export const createPackage = (params) => {
   const { projectName, answers } = params;
   return `{
@@ -51,7 +61,8 @@ export const createPackage = (params) => {
     ${ui(answers.ui).dependencies}
   },
   "devDependencies": {
-    ${lang(answers.variant)}${ui(answers.ui).devDependencies} 
+    ${lang(answers.variant)}${ui(answers.ui).devDependencies},
+    ${css(answers.css)}
   }
 }
 `;

@@ -28,6 +28,17 @@ const ui = (type) => {
     plugins
   }
 }
+const css = (type) => {
+  if (type === "scss") {
+    return `css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: "@import '@/styles/main.scss';"
+        }
+      }
+    },`
+  }
+}
 const createViteConfig = (params) => {
   const { projectName, answers } = params;
   return `import { defineConfig } from 'vite'
@@ -44,6 +55,7 @@ const createViteConfig = (params) => {
         vue(),
         ${ui(answers.ui).plugins}
       ],
+      ${css(answers.css)}
       resolve: {
         extensions: [
           ".mjs",
@@ -65,7 +77,8 @@ const createViteConfig = (params) => {
     })
     `;
 };
-const createFileName = (variant) => {
+const createFileName = (params) => {
+  const { variant } = params
   return `vite.config.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {

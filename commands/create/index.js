@@ -31,7 +31,7 @@ const projectWriteFile = (importFilePath, projectName, answers) => {
         const { createFileName, createTemplate } = data.default;
         const path = join(cwdUrl, projectName);
         const writeFile = () => {
-            fs.writeFile(join(cwdUrl, projectName, createFileName(answers.variant)), createTemplate({
+            fs.writeFile(join(cwdUrl, projectName, createFileName(answers)), createTemplate({
                 projectName,
                 answers,
             }), "utf-8", (err) => {

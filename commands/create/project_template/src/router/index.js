@@ -1,7 +1,7 @@
 import { getJavaScriptFileSuffix } from "../../../utils/index.js";
 const createRouter = (params) => {
-    const { projectName, answers } = params;
-    return `import { createRouter, createWebHashHistory } from "vue-router";
+  const { projectName, answers } = params;
+  return `import { createRouter, createWebHashHistory } from "vue-router";
 
   const routes = [
     {
@@ -20,10 +20,11 @@ const createRouter = (params) => {
   export default router;
   `;
 };
-const createFileName = (variant) => {
-    return `index.${getJavaScriptFileSuffix(variant)}`;
+const createFileName = (params) => {
+  const { variant } = params
+  return `index.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {
-    createFileName: createFileName,
-    createTemplate: createRouter,
+  createFileName: createFileName,
+  createTemplate: createRouter,
 };

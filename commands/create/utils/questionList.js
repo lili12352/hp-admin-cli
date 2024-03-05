@@ -44,4 +44,19 @@ export const questionsList = [
       },
     ],
   },
+  {
+    type: "list",
+    name: "css",
+    message: "Select a css",
+    choices: [
+      {
+        name: "scss",
+        value: "scss",
+      },
+      {
+        name: "less",
+        value: "less",
+      },
+    ],
+  },
 ];

@@ -1,7 +1,7 @@
 import { getJavaScriptFileSuffix } from "../../utils/index.js";
 const createApp = (params) => {
-    const { answers } = params;
-    return `<script setup lang="${getJavaScriptFileSuffix(answers.variant)}"></script>
+  const { answers } = params;
+  return `<script setup lang="${getJavaScriptFileSuffix(answers.variant)}"></script>
 
   <template>
     <router-view />
@@ -10,10 +10,10 @@ const createApp = (params) => {
   <style scoped></style>
    `;
 };
-const createFileName = (variant) => {
-    return `App.vue`;
+const createFileName = (params) => {
+  return `App.vue`;
 };
 export default {
-    createFileName: createFileName,
-    createTemplate: createApp,
+  createFileName: createFileName,
+  createTemplate: createApp,
 };
