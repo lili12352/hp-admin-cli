@@ -37,7 +37,8 @@ const css = (type) => {
     return `"sass": "^1.71.1",
     "sass-loader": "^14.1.1"`
   } else {
-    return `"less": "^4.2.0"`
+    return `"less": "^4.2.0",
+    "less-loader": "^12.2.0"`
   }
 
 }
