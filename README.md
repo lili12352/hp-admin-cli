@@ -27,7 +27,7 @@ admin-cli create <name>
   - [x] 语言选择： typeScript or javaScript
   - [x] ui库选择 ：element Plus or Ant Design
   - [x] css扩展语言选择: less or scss
-  - [ ] 代码规范:eslint 和Prettier
+  - [x] 代码规范:eslint 和Prettier
 - 框架模块自提
   - [ ] 多语言：使用i18配置多语言
   - [ ] 多主题：内置普通、护眼、黑暗、深蓝四种主题模式

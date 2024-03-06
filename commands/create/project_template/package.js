@@ -44,16 +44,35 @@ const css = (type) => {
 const eslintWrite = (answers) => {
   const { variant, eslint } = answers;
   if (!eslint) return "";
-  if(variant === "TypeScript"){
-    return ``
-  }else{
+  if (variant === "TypeScript") {
+    return `,
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.22.0",
+    "vue-eslint-parser": "^9.4.2"`;
+  } else {
     return `,
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-vue": "^9.22.0",
-    "prettier": "^3.2.5"`
+    "prettier": "^3.2.5"`;
+  }
+};
+
+const eslintScripts = (answers) => {
+  if (answers.eslint) {
+    return `,
+    "lint": "eslint --ext .js,.vue,ts,jsx,tsx src",
+    "prettier": "prettier --write ."`;
+  } else {
+    return "";
   }
 };
 
@@ -67,7 +86,7 @@ export const createPackage = (params) => {
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview"${eslintScripts(answers)}
   },
   "dependencies": {
     "path": "^0.12.7",

@@ -6,11 +6,9 @@ export const questionsList = [
     default: "0.0.0",
     validate: (value) => {
       const str = value.split(".");
-      if (str.length !== 3)
-        return "input format(0.0.0)";
+      if (str.length !== 3) return "input format(0.0.0)";
       const flag = str.every((currentValue) => Number(currentValue) >= 0);
-      if (!flag)
-        return "please number";
+      if (!flag) return "please number";
       return flag;
     },
   },
@@ -62,7 +60,7 @@ export const questionsList = [
   {
     type: "confirm",
     name: "eslint",
-    message: "if use eslint and Prettier",
-    default:true
+    message: "is use eslint config and Prettier",
+    default: true,
   },
 ];
