@@ -1,4 +1,3 @@
-
 const lang = (variant) => {
   let ts = "";
   if (variant === "TypeScript") {
@@ -11,37 +10,52 @@ const lang = (variant) => {
 };
 
 const ui = (type) => {
-  let dependencies = ''
-  let devDependencies = ''
+  let dependencies = "";
+  let devDependencies = "";
   switch (type) {
     case "element":
       devDependencies = `,
-      "unplugin-auto-import": "^0.17.5",
-      "unplugin-vue-components": "^0.26.0"`
-      dependencies = `"element-plus": "^2.6.0"`
-      break
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0"`;
+      dependencies = `"element-plus": "^2.6.0"`;
+      break;
     case "antdv":
-      dependencies = `"ant-design-vue": "^4.1.2"`
-      break
+      dependencies = `"ant-design-vue": "^4.1.2"`;
+      break;
     default:
-      return
+      return;
   }
   return {
     dependencies,
-    devDependencies
-  }
-}
+    devDependencies,
+  };
+};
 
 const css = (type) => {
   if (type === "scss") {
     return `"sass": "^1.71.1",
-    "sass-loader": "^14.1.1"`
+    "sass-loader": "^14.1.1"`;
   } else {
     return `"less": "^4.2.0",
-    "less-loader": "^12.2.0"`
+    "less-loader": "^12.2.0"`;
   }
+};
 
-}
+const eslintWrite = (answers) => {
+  const { variant, eslint } = answers;
+  if (!eslint) return "";
+  if(variant === "TypeScript"){
+    return ``
+  }else{
+    return `,
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-vue": "^9.22.0",
+    "prettier": "^3.2.5"`
+  }
+};
 
 export const createPackage = (params) => {
   const { projectName, answers } = params;
@@ -63,7 +77,7 @@ export const createPackage = (params) => {
   },
   "devDependencies": {
     ${lang(answers.variant)}${ui(answers.ui).devDependencies},
-    ${css(answers.css)}
+    ${css(answers.css)}${eslintWrite(answers)}
   }
 }
 `;

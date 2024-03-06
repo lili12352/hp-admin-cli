@@ -59,4 +59,10 @@ export const questionsList = [
       },
     ],
   },
+  {
+    type: "confirm",
+    name: "eslint",
+    message: "if use eslint and Prettier",
+    default:true
+  },
 ];

@@ -28,7 +28,8 @@ const projectWriteFile = (importFilePath, projectName, answers) => {
     const { } = answers;
     const cwdUrl = process.cwd();
     import(importFilePath).then((data) => {
-        const { createFileName, createTemplate } = data.default;
+        const { createFileName, createTemplate,noWriteFile } = data.default;
+        if(noWriteFile && noWriteFile(answers))return // 不写入文件
         const path = join(cwdUrl, projectName);
         const writeFile = () => {
             fs.writeFile(join(cwdUrl, projectName, createFileName(answers)), createTemplate({

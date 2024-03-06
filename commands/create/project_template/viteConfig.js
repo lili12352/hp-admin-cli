@@ -92,7 +92,11 @@ const createFileName = (params) => {
   const { variant } = params
   return `vite.config.${getJavaScriptFileSuffix(variant)}`;
 };
+const noWriteFile =()=>{
+  return false
+}
 export default {
   createFileName: createFileName,
   createTemplate: createViteConfig,
+  noWriteFile:noWriteFile
 };
