@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clear": "rimraf build",
-    "build": "npm run clear && tsc"
+    "start": "npm link & npm run clean & npm run cli",
+    "cli": "admin-cli create test",
+    "clean": "rimraf test"
   },
   "bin": {
     "admin-cli": "index.js",
