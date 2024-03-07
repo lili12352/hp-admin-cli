@@ -9,14 +9,14 @@ import mainLay from "./components/main/index.vue"`;
 const html = () => {
   return `<div class="left-model">
     <div class="aside">
-      <asideLay></asideLay>
+      <asideLay />
     </div>
     <div class="conter">
-      <div class="head">
-        <headLay></headLay>
+      <div class="head-lay">
+        <headLay />
       </div>
       <div class="main">
-        <mainLay></mainLay>
+        <mainLay />
       </div>
     </div>
   </div>`;
@@ -35,9 +35,6 @@ const css = () => {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-.head {
-  height: 50px;
 }
 .main {
   flex: 1;

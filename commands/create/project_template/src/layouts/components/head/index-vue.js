@@ -4,15 +4,11 @@ const script = () => {
   return ``;
 };
 const html = () => {
-  return `<div class="head">head</div>`;
+  return `<div class="header">head</div>`;
 };
 
 const css = () => {
-  return `.head {
-  width: 100%;
-  height: 100%;
-  background-color: aqua;
-}`;
+  return ``;
 };
 
 const createHead = (params) => {

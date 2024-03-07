@@ -5,7 +5,7 @@ const script = () => {
 };
 const html = () => {
   return `<div>
-    <leftModel></leftModel>
+    <leftModel />
   </div>`;
 };
 

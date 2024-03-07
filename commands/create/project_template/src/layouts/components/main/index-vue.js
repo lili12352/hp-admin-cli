@@ -10,11 +10,7 @@ const html = (answers) => {
 };
 
 const css = () => {
-  return `.main {
-    width: 100%;
-    height: 100%;
-    background-color: bisque;
-  }`;
+  return ``;
 };
 const createMain = (params) => {
   return vueTemplate(params.answers, script, html, css);

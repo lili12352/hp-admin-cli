@@ -20,7 +20,7 @@ const htmlTemplate = (hTemplate) => {
 };
 
 const styleTemplate = (cTemplate, css) => {
-  return `<style lang=${css} scoped>
+  return `<style lang="${css}" scoped>
 ${cTemplate}
 </style>`;
 };

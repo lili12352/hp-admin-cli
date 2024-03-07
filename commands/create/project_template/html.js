@@ -10,7 +10,7 @@ const createHtml = (params) => {
         <title>${projectName}</title>
       </head>
       <body>
-        <div id="app"></div>
+        <div id="app" class="dark"></div>
         <script type="module" src="/src/main.${getJavaScriptFileSuffix(
           answers.variant
         )}"></script>
