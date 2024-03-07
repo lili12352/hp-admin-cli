@@ -33,55 +33,52 @@ const items = ref([
 ]);`;
 };
 
-const element = () => {
-  return `<div class="aside">
-  <div class="log">log</div>
-  <el-menu
-    popper-effect="light"
-    active-text-color="#ffffff"
-    text-color="#ffffffa6"
-    background-color="transparent"
-    class="el-menu-vertical-demo"
-    default-active="2"
+const elementMenu = () => {
+  return `<el-menu
+  popper-effect="light"
+  active-text-color="#ffffff"
+  text-color="#ffffffa6"
+  background-color="transparent"
+  class="el-menu-vertical-demo"
+  default-active="2"
+>
+  <el-sub-menu
+    :index="index"
+    v-for="(menu, index) in items"
+    :key="menu.key"
   >
-    <el-sub-menu
-      :index="index"
-      v-for="(menu, index) in items"
-      :key="menu.key"
-    >
-      <template #title>
-        <span>{{ menu.title }}</span>
-      </template>
-      <div class="my-menu">
-        <el-menu-item
-          v-for="menuItem in menu.children"
-          :index="menuItem.key"
-          :key="menuItem.key"
-          >{{ menuItem.title }}</el-menu-item
-        >
-      </div>
-    </el-sub-menu>
-  </el-menu>
-</div>`;
+    <template #title>
+      <span>{{ menu.title }}</span>
+    </template>
+    <div class="my-menu">
+      <el-menu-item
+        v-for="menuItem in menu.children"
+        :index="menuItem.key"
+        :key="menuItem.key"
+        >{{ menuItem.title }}</el-menu-item
+      >
+    </div>
+  </el-sub-menu>
+</el-menu>`;
 };
-const ant = () => {
-  return `<div class="aside">
-  <div class="log">log</div>
-  <a-menu mode="inline" theme="dark" :items="items" />
-</div>`;
+const antMenu = () => {
+  return `<a-menu mode="inline" theme="dark" :items="items" />`;
 };
 const html = (answers) => {
   const { ui } = answers;
-  let str = ``;
+  let uiMenu = ``;
   switch (ui) {
     case "element":
-      str = element(answers);
+      uiMenu = elementMenu(answers);
       break;
     case "antdv":
-      str = ant(answers);
+      uiMenu = antMenu(answers);
       break;
   }
-  return str;
+  return `<div class="aside">
+  <div class="log">log</div>
+  ${uiMenu}
+</div>`;
 };
 
 const css = (answers) => {
