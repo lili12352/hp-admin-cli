@@ -7,13 +7,15 @@ import { createFolder } from "../../utils/index.js";
 import { questionsList } from "./project_utils/questionList.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// type： input, number, confirm, list, checkbox ...
 
 const userQuestions = (projectName) => {
   inquirer
     .prompt(questionsList)
     .then((answers) => {
       createTemplates(projectName, answers);
+      console.log(chalk.blue("The project creation has finished"));
+      console.log(chalk.bold("cd " + projectName));
+      console.log(chalk.bold("npm install"));
     })
     .catch((error) => {
       if (error.isTtyError) {
