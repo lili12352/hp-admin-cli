@@ -1,7 +1,9 @@
-import { getJavaScriptFileSuffix } from "../../utils/index.js";
+import { getJavaScriptFileSuffix } from "../../project_utils/index.js";
 const createApp = (params) => {
   const { answers } = params;
-  return `<script setup lang="${getJavaScriptFileSuffix(answers.variant)}"></script>
+  return `<script setup lang="${getJavaScriptFileSuffix(
+    answers.variant
+  )}"></script>
 
   <template>
     <router-view />

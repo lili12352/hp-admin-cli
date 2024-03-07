@@ -1,10 +1,10 @@
-import { getJavaScriptFileSuffix } from "../utils/index.js";
+import { getJavaScriptFileSuffix } from "../project_utils/index.js";
 const replacement = () => {
   return '`${pathResolve("src")}/`';
 };
 const ui = (type) => {
-  let plugins = ''
-  let importStr = ''
+  let plugins = "";
+  let importStr = "";
   switch (type) {
     case "element":
       plugins = `
@@ -13,22 +13,21 @@ const ui = (type) => {
     }),
     Components({
       resolvers: [ElementPlusResolver()],
-    })`
-      importStr =
-        `import AutoImport from 'unplugin-auto-import/vite'
+    })`;
+      importStr = `import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'`
-      break
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'`;
+      break;
     case "antdv":
-      break
+      break;
     default:
-      return
+      return;
   }
   return {
     importStr,
-    plugins
-  }
-}
+    plugins,
+  };
+};
 const css = (type) => {
   if (type === "scss") {
     return `css: {
@@ -37,9 +36,9 @@ const css = (type) => {
           additionalData: "@import '@/styles/main.scss';"
         }
       }
-    },`
+    },`;
   } else {
-    let resolve = '@import "${resolve(__dirname, `./src/styles/main.less`)}";'
+    let resolve = '@import "${resolve(__dirname, `./src/styles/main.less`)}";';
     return `css: {
       preprocessorOptions: {
         less: {
@@ -47,9 +46,9 @@ const css = (type) => {
           additionalData: ${"`" + resolve + "`"}
         }
       }
-    },`
+    },`;
   }
-}
+};
 const createViteConfig = (params) => {
   const { projectName, answers } = params;
   return `import { defineConfig } from 'vite'
@@ -89,14 +88,14 @@ export default defineConfig({
 `;
 };
 const createFileName = (params) => {
-  const { variant } = params
+  const { variant } = params;
   return `vite.config.${getJavaScriptFileSuffix(variant)}`;
 };
-const noWriteFile =()=>{
-  return false
-}
+const noWriteFile = () => {
+  return false;
+};
 export default {
   createFileName: createFileName,
   createTemplate: createViteConfig,
-  noWriteFile:noWriteFile
+  noWriteFile: noWriteFile,
 };

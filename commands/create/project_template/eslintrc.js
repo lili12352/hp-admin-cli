@@ -1,4 +1,4 @@
-import { getJavaScriptFileSuffix } from "../utils/index.js";
+import { getJavaScriptFileSuffix } from "../project_utils/index.js";
 const createPrettierrc = (params) => {
   const { answers } = params;
   if (answers.variant === "TypeScript") {

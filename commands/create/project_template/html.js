@@ -1,7 +1,7 @@
-import { getJavaScriptFileSuffix } from "../utils/index.js";
+import { getJavaScriptFileSuffix } from "../project_utils/index.js";
 const createHtml = (params) => {
-    const { projectName, answers } = params;
-    return `<!doctype html>
+  const { projectName, answers } = params;
+  return `<!doctype html>
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -11,14 +11,16 @@ const createHtml = (params) => {
       </head>
       <body>
         <div id="app"></div>
-        <script type="module" src="/src/main.${getJavaScriptFileSuffix(answers.variant)}"></script>
+        <script type="module" src="/src/main.${getJavaScriptFileSuffix(
+          answers.variant
+        )}"></script>
       </body>
     </html>`;
 };
 const createFileName = () => {
-    return "index.html";
+  return "index.html";
 };
 export default {
-    createFileName: createFileName,
-    createTemplate: createHtml,
+  createFileName: createFileName,
+  createTemplate: createHtml,
 };

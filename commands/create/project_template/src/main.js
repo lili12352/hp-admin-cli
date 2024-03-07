@@ -1,22 +1,21 @@
-import { getJavaScriptFileSuffix } from "../../utils/index.js";
+import { getJavaScriptFileSuffix } from "../../project_utils/index.js";
 const ui = (type) => {
-  let importStr = ''
-  let use = ''
+  let importStr = "";
+  let use = "";
   switch (type) {
     case "antdv":
       importStr = `import Antd from 'ant-design-vue';
-      import 'ant-design-vue/dist/reset.css';`
-      use = `app.use(Antd)`
-      break
+      import 'ant-design-vue/dist/reset.css';`;
+      use = `app.use(Antd)`;
+      break;
     default:
-      break
+      break;
   }
   return {
     importStr,
-    use
-  }
-
-}
+    use,
+  };
+};
 const createMain = (params) => {
   const { projectName, answers } = params;
   return `import { createApp } from "vue";
@@ -34,7 +33,7 @@ const createMain = (params) => {
    `;
 };
 const createFileName = (params) => {
-  const { variant } = params
+  const { variant } = params;
   return `main.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {
