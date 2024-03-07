@@ -2,7 +2,7 @@ export const questionsList = [
   {
     type: "input",
     name: "version",
-    message: "please enter the project version",
+    message: "请输入项目的版本号",
     default: "0.0.0",
     validate: (value) => {
       const str = value.split(".");
@@ -15,7 +15,7 @@ export const questionsList = [
   {
     type: "list",
     name: "variant", // key 名
-    message: "Select a variant",
+    message: "请选择一个需要的语言",
     choices: [
       {
         name: "TypeScript",
@@ -30,7 +30,7 @@ export const questionsList = [
   {
     type: "list",
     name: "ui", // key 名
-    message: "Select a UI",
+    message: "请选择一个需要的ui",
     choices: [
       {
         name: "element-plus",
@@ -45,7 +45,7 @@ export const questionsList = [
   {
     type: "list",
     name: "css",
-    message: "Select a css",
+    message: "请选择一个css预处理器",
     choices: [
       {
         name: "scss",
@@ -58,9 +58,19 @@ export const questionsList = [
     ],
   },
   {
-    type: "confirm",
-    name: "eslint",
-    message: "is use eslint config and Prettier",
-    default: true,
+    type: "checkbox",
+    name: "checkbox",
+    message: "请选择需要的功能（多选、默认全选）",
+    choices: [
+      {
+        name: "eslint and Prettier",
+        value: "eslint",
+      },
+      {
+        name: "i18n多语言",
+        value: "i18n",
+      },
+    ],
+    default: ["eslint", "i18n"],
   },
 ];

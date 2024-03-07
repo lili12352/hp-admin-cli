@@ -26,8 +26,14 @@ ${cTemplate}
 };
 
 export const vueTemplate = (answers, script, html, style) => {
-  return `${scriptTemplate(script(), answers.variant)}
-${htmlTemplate(html())}
-${styleTemplate(style(), answers.css)}
+  return `${scriptTemplate(script(answers), answers.variant)}
+${htmlTemplate(html(answers))}
+${styleTemplate(style(answers), answers.css)}
 `;
+};
+
+export const isI18n = (type, text) => {
+  if (type) {
+    return `{{$t()}}`;
+  }
 };

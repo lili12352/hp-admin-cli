@@ -12,7 +12,13 @@ const userQuestions = (projectName) => {
   inquirer
     .prompt(questionsList)
     .then((answers) => {
-      createTemplates(projectName, answers);
+      const { checkbox } = answers;
+      const checkboxList = ["eslint", "i18n"];
+      const checkboxObj = {};
+      checkboxList.forEach((key) => {
+        checkboxObj[key] = checkbox.includes(key);
+      });
+      createTemplates(projectName, { ...answers, ...checkboxObj });
       console.log(chalk.blue("The project creation has finished"));
       console.log(chalk.bold("cd " + projectName));
       console.log(chalk.bold("npm install"));

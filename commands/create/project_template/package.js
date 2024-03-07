@@ -76,6 +76,15 @@ const eslintScripts = (answers) => {
   }
 };
 
+const i18n = (type) => {
+  if (type) {
+    return `,
+    "vue-i18n": "^9.10.1"`;
+  } else {
+    return "";
+  }
+};
+
 export const createPackage = (params) => {
   const { projectName, answers } = params;
   return `{
@@ -92,7 +101,7 @@ export const createPackage = (params) => {
     "path": "^0.12.7",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0",
-    ${ui(answers.ui).dependencies}
+    ${ui(answers.ui).dependencies}${i18n(answers.i18n)}
   },
   "devDependencies": {
     ${lang(answers.variant)}${ui(answers.ui).devDependencies},
