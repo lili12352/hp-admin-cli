@@ -1,27 +1,27 @@
-## Introduction
+## 简介
 
-hp-admin-cli是一款能根据需求自动配置vue后台管理的脚手架，内置使用vue3 + vue-router +pinia 其他功能均可自定义
+hp-admin-cli是一款能根据需求自动配置vue后台管理的脚手架，内置使用vue3 + vue-router + pinia + axios 其他功能均可自定义。
 
-## Install
+每次创建后台项目时，要么自己新建项目手动搭建框架，要么从仓库拉取代码然后将多余的模块进行删除。那么有没有一种方法能根据需求自动配置项目呢？于是便有了将后台框架用脚手架搭建的想法。
+
+## 下载
 
 ```
 npm i hp-admin-cli -g
 ```
 
-## use
+## 使用方法
 
 ```
 admin-cli create <name>
 ```
 
-## peculiarity
+## 功能
 
 - 极简操作，安装就可配置
 - 自定义技术栈 :  vue3 +elementUI or vue3+Ant Design 由你搭配
 - 自定义后台管理功能模块：权限配置 or 多语言 or 动态换肤 项目功能由你选择
 - 代码规范可配置：自选是否在项目中应用eslint 和Prettier 
-
-## Feature
 
 - 框架技术自提
   - [x] 语言选择： typeScript or javaScript

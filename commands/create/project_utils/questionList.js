@@ -67,8 +67,28 @@ export const questionsList = [
         value: "eslint",
       },
       {
-        name: "i18n多语言",
+        name: "i18n国际化",
         value: "i18n",
+      },
+      {
+        name: "多主题",
+        value: "theme",
+        disabled: "多主题正在开发中",
+      },
+      {
+        name: "多布局",
+        value: "layout",
+        disabled: "多布局正在开发中",
+      },
+      {
+        name: "用户管理",
+        value: "user",
+        disabled: "用户管理正在开发中",
+      },
+      {
+        name: "权限管理",
+        value: "authority",
+        disabled: "权限管理正在开发中",
       },
     ],
     default: ["eslint", "i18n"],
