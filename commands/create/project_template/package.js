@@ -101,6 +101,7 @@ export const createPackage = (params) => {
     "path": "^0.12.7",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0",
+    "pinia": "^2.1.7",
     ${ui(answers.ui).dependencies}${i18n(answers.i18n)}
   },
   "devDependencies": {
