@@ -1,46 +1,61 @@
 import { getJavaScriptFileSuffix } from "../../project_utils/index.js";
 const ui = (type) => {
-  let importStr = "";
-  let use = "";
+  let importUi = "";
+  let useUi = "";
   switch (type) {
     case "antdv":
-      importStr = `import Antd from 'ant-design-vue';
+      importUi = `import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';`;
-      use = `app.use(Antd)`;
+      useUi = `app.use(Antd)`;
       break;
     default:
       break;
   }
   return {
-    importStr,
-    use,
+    importUi,
+    useUi,
   };
 };
 
 const i18n = (type) => {
-  let importStr = "";
-  let use = "";
+  let importI18n = "";
+  let useI18n = "";
   if (type) {
-    importStr = `
+    importI18n = `
 import { i18n } from "./lang/index";`;
-    use = ".use(i18n)";
+    useI18n = ".use(i18n)";
   }
   return {
-    importStr,
-    use,
+    importI18n,
+    useI18n,
+  };
+};
+
+const pinia = () => {
+  let importPinia = `import { createPinia } from "pinia";`;
+  let usePinia = `const pinia = createPinia();
+app.use(pinia);`;
+  return {
+    importPinia,
+    usePinia,
   };
 };
 const createMain = (params) => {
   const { projectName, answers } = params;
+  const { importUi, useUi } = ui(answers.ui);
+  const { importI18n, useI18n } = i18n(answers.i18n);
+  const { importPinia, usePinia } = pinia();
   return `import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
 import router from "@/router";
-${ui(answers.ui).importStr}${i18n(answers.i18n).importStr}
+${importPinia}
+${importUi}${importI18n}
 
 const app = createApp(App);
-app.use(router)${i18n(answers.i18n).use};
-${ui(answers.ui).use}
+${usePinia}
+app.use(router)${useI18n};
+${useUi}
 router.isReady().then(() => {
   app.mount("#app");
 });

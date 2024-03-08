@@ -43,8 +43,8 @@ const elementMenu = () => {
   default-active="2"
 >
   <el-sub-menu
-    :index="index"
-    v-for="(menu, index) in items"
+    :index="menu.key"
+    v-for="menu in items"
     :key="menu.key"
   >
     <template #title>
