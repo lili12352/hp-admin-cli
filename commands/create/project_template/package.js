@@ -76,6 +76,14 @@ const eslintScripts = (answers) => {
   }
 };
 
+const npmRunDev = (answers) => {
+  if (answers.eslint) {
+    `"dev": "prettier --write . & eslint --ext .js,.vue,ts,jsx,tsx src & vite --mode development",`;
+  } else {
+    `"dev": "vite --mode development",`;
+  }
+};
+
 const i18n = (type) => {
   if (type) {
     return `,
@@ -93,7 +101,7 @@ export const createPackage = (params) => {
   "version": "${answers.version}",
   "type": "module",
   "scripts": {
-    "dev": "vite --mode development & npm run lint & npm run production",
+    ${npmRunDev(answers)}
     "serve": "vite --mode development",
     "serve:pro": "vite --mode production",
     "build": "vite build --mode development",
