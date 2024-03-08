@@ -14,9 +14,9 @@ const ui = (type) => {
     Components({
       resolvers: [ElementPlusResolver()],
     })`;
-      importStr = `import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'`;
+      importStr = `import AutoImport from "unplugin-auto-import/vite"
+import Components from "unplugin-vue-components/vite"
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers"`;
       break;
     case "antdv":
       break;
@@ -51,39 +51,58 @@ const css = (type) => {
 };
 const createViteConfig = (params) => {
   const { projectName, answers } = params;
-  return `import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+  return `import { defineConfig, loadEnv } from "vite";
+import vue from "@vitejs/plugin-vue"
 ${ui(answers.ui).importStr}
-import { resolve } from 'path';
+import { resolve } from "path";
 const root = process.cwd();
 function pathResolve(dir) {
   return resolve(root, '.', dir);
 }
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    ${ui(answers.ui).plugins}
-  ],
-  ${css(answers.css)}
-  resolve: {
-    extensions: [
-      ".mjs",
-      ".js",
-      ".ts",
-      ".jsx",
-      ".tsx",
-      ".json",
-      ".scss",
-      ".css",
+export default defineConfig((configEnv)=>{
+  const { VITE_BASE_API } = loadEnv(configEnv.mode, process.cwd());
+  return {
+    plugins: [
+      vue(),
+      ${ui(answers.ui).plugins}
     ],
-    alias: [
-      {
-        find: ${String.raw`/\@\//`} ,
-        replacement: ${replacement()},
+    ${css(answers.css)}
+    resolve: {
+      extensions: [
+        ".mjs",
+        ".js",
+        ".ts",
+        ".jsx",
+        ".tsx",
+        ".json",
+        ".scss",
+        ".css",
+      ],
+      alias: [
+        {
+          find: ${String.raw`/\@\//`} ,
+          replacement: ${replacement()},
+        },
+      ],
+    },
+    server: {
+      host: true,
+      port: 8888,
+      open: true,
+      cors: true,
+      proxy: {
+        "/api": {
+          target: VITE_BASE_API, // 测试地址
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\\/api/, ""),
+        },
       },
-    ],
-  },
+      warmup: {
+        clientFiles: ["./src/layouts/**/*.vue"],
+      },
+    },
+  }
 })
 `;
 };

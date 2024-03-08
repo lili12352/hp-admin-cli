@@ -7,7 +7,8 @@ import { store } from "../index";
 export const useUserInfoStore = defineStore({
   id: "user",
   state: () => ({
-    name: "hhh",
+    userName: "hhh",
+    token: "d64406c94615a849a6cb0b71f3945879",
   }),
   actions: {},
 });

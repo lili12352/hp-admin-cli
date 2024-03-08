@@ -93,8 +93,11 @@ export const createPackage = (params) => {
   "version": "${answers.version}",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --mode development & npm run lint & npm run production",
+    "serve": "vite --mode development",
+    "serve:pro": "vite --mode production",
+    "build": "vite build --mode development",
+    "build:pro": "vite build --mode production",
     "preview": "vite preview"${eslintScripts(answers)}
   },
   "dependencies": {
@@ -102,6 +105,7 @@ export const createPackage = (params) => {
     "vue": "^3.4.19",
     "vue-router": "^4.3.0",
     "pinia": "^2.1.7",
+    "axios": "^1.6.7",
     ${ui(answers.ui).dependencies}${i18n(answers.i18n)}
   },
   "devDependencies": {

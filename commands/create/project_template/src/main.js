@@ -61,8 +61,8 @@ router.isReady().then(() => {
 });
  `;
 };
-const createFileName = (params) => {
-  const { variant } = params;
+const createFileName = (answers) => {
+  const { variant } = answers;
   return `main.${getJavaScriptFileSuffix(variant)}`;
 };
 export default {
