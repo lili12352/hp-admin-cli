@@ -78,9 +78,9 @@ const eslintScripts = (answers) => {
 
 const npmRunDev = (answers) => {
   if (answers.eslint) {
-    `"dev": "prettier --write . & eslint --ext .js,.vue,ts,jsx,tsx src & vite --mode development",`;
+    return `"dev": "prettier --write . & eslint --ext .js,.vue,ts,jsx,tsx src & vite --mode development",`;
   } else {
-    `"dev": "vite --mode development",`;
+    return `"dev": "vite --mode development",`;
   }
 };
 
