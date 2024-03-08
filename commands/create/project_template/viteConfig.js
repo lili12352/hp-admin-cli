@@ -40,13 +40,13 @@ const css = (type) => {
   } else {
     let resolve = '@import "${resolve(__dirname, `./src/styles/main.less`)}";';
     return `css: {
-      preprocessorOptions: {
-        less: {
-          javascriptEnabled: true,
-          additionalData: ${"`" + resolve + "`"}
-        }
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        additionalData: ${"`" + resolve + "`"}
       }
-    },`;
+    }
+  },`;
   }
 };
 const createViteConfig = (params) => {
@@ -54,10 +54,10 @@ const createViteConfig = (params) => {
   return `import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 ${ui(answers.ui).importStr}
-import { resolve } from "path";
+import { resolve } from 'path';
 const root = process.cwd();
 function pathResolve(dir) {
-  return resolve(root, ".", dir);
+  return resolve(root, '.', dir);
 }
 // https://vitejs.dev/config/
 export default defineConfig({
