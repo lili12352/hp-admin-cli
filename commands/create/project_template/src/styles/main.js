@@ -1,15 +1,17 @@
 const createMainCss = (params) => {
   const { answers } = params;
   const identifier = answers.css === "scss" ? "$" : "@";
-  return `${identifier}Dark-blue-gb-aside:#081947;
-${identifier}Dark-blue-gb:#021633;
-${identifier}Dark-blue-color:#ffffff;
-.dark-blue{
-  .aside{
+  return `${identifier}Dark-blue-gb-aside: #081947;
+${identifier}Dark-blue-gb: #021633;
+${identifier}Dark-blue-color: #ffffff;
+.dark-blue {
+  color: ${identifier}Dark-blue-color;
+  .aside {
+    color: #fff;
     height: 100%;
     background-color: ${identifier}Dark-blue-gb;
   }
-  .head-lay{
+  .head-lay {
     box-sizing: border-box;
     .header {
       width: 100%;
@@ -27,15 +29,17 @@ ${identifier}Dark-blue-color:#ffffff;
   }
 }
 
-${identifier}Dark-gb-aside:#1a1a1a;
-${identifier}Dark-gb:#000000;
-${identifier}Dark-color:#ffffff;
-.dark{
-  .aside{
+${identifier}Dark-gb-aside: #1a1a1a;
+${identifier}Dark-gb: #000000;
+${identifier}Dark-color: #ffffff;
+.dark {
+  color: ${identifier}Dark-color;
+  .aside {
+    color: #fff;
     height: 100%;
     background-color: ${identifier}Dark-gb-aside;
   }
-  .head-lay{
+  .head-lay {
     box-sizing: border-box;
     .header {
       width: 100%;
@@ -55,15 +59,17 @@ ${identifier}Dark-color:#ffffff;
   }
 }
 
-${identifier}light-gb-aside:#1a1a1a;
-${identifier}light-gb:#ffffff;
-${identifier}light-color:#000000;
-.light{
-  .aside{
+${identifier}light-gb-aside: #1a1a1a;
+${identifier}light-gb: #ffffff;
+${identifier}light-color: #000000;
+.light {
+  color: ${identifier}light-color;
+  .aside {
+    color: #fff;
     height: 100%;
     background-color: ${identifier}light-gb-aside;
   }
-  .head-lay{
+  .head-lay {
     box-sizing: border-box;
     .header {
       width: 100%;
@@ -81,11 +87,12 @@ ${identifier}light-color:#000000;
     color: ${identifier}light-color;
     background-color: ${identifier}light-gb;
   }
-}`;
+}
+`;
 };
 const createFileName = (params) => {
   const { css } = params;
-  return `main.${css}`;
+  return "main." + css;
 };
 export default {
   createFileName: createFileName,

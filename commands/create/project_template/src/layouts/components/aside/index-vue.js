@@ -1,114 +1,93 @@
 import { vueTemplate } from "../../../../../project_utils/index.js";
 
-const script = () => {
-  return `import { ref } from "vue";
-const items = ref([
-  {
-    key: "sub1",
-    label: "Navigation One",
-    title: "Navigation One",
-    children: [
-      {
-        key: "5",
-        label: "Option 5",
-        title: "Option 5",
-      },
-      {
-        key: "6",
-        label: "Option 6",
-        title: "Option 6",
-      },
-      {
-        key: "7",
-        label: "Option 7",
-        title: "Option 7",
-      },
-      {
-        key: "8",
-        label: "Option 8",
-        title: "Option 8",
-      },
-    ],
-  },
-]);`;
+const js = () => {
+  return `const getMenuList = (routerList) => {
+  if (!routerList || routerList.length === 0) return [];
+  return routerList.map((router) => {
+    return {
+      key: router.path,
+      label: router.name,
+      title: router.path,
+      icon: router.meta.icon,
+      children: getMenuList(router.children),
+    };
+  });
+};
+const items = ref(getMenuList(userInfoStore.routerList));`;
+};
+const ts = () => {
+  return `interface MenuList {
+  key: string;
+  label: string;
+  title: string;
+  icon?: string;
+  children?: MenuList[] | undefined;
+}
+const getMenuList = (routerList: RouterRes[]): MenuList[] => {
+  if (!routerList || routerList.length === 0) return [];
+  return routerList.map((router: RouterRes): MenuList => {
+    return {
+      key: router.path,
+      label: router.name,
+      title: router.path,
+      icon: router.meta.icon,
+      children: getMenuList(router.children),
+    };
+  });
+};
+const items = ref<MenuList[]>(getMenuList(userInfoStore.routerList));`;
 };
 
-const elementMenu = () => {
-  return `<el-menu
-  popper-effect="light"
-  active-text-color="#ffffff"
-  text-color="#ffffffa6"
-  background-color="transparent"
-  class="el-menu-vertical-demo"
-  default-active="2"
->
-  <el-sub-menu
-    :index="menu.key"
-    v-for="menu in items"
-    :key="menu.key"
-  >
-    <template #title>
-      <span>{{ menu.title }}</span>
-    </template>
-    <div class="my-menu">
-      <el-menu-item
-        v-for="menuItem in menu.children"
-        :index="menuItem.key"
-        :key="menuItem.key"
-        >{{ menuItem.title }}</el-menu-item
-      >
-    </div>
-  </el-sub-menu>
-</el-menu>`;
+const script = (answers) => {
+  const { variant } = answers;
+  return `import { ref } from "vue";
+import { useSystemStore } from "@/store/modules/system";
+import { useUserInfoStore } from "@/store/modules/user";
+
+import Menu from "./menu.vue";
+import SubMenu from "./subMenu.vue";
+import MenuItem from "./menu-item.vue";
+
+const systemStore = useSystemStore();
+const userInfoStore = useUserInfoStore();
+${variant === "TypeScript" ? ts() : js()}
+`;
 };
-const antMenu = () => {
-  return `<a-menu mode="inline" theme="dark" :items="items" />`;
-};
+
 const html = (answers) => {
-  const { ui } = answers;
-  let uiMenu = ``;
-  switch (ui) {
-    case "element":
-      uiMenu = elementMenu(answers);
-      break;
-    case "antdv":
-      uiMenu = antMenu(answers);
-      break;
-  }
-  return `<div class="aside">
+  return `<div
+  class="aside"
+  :class="systemStore.isCollapse ? 'close-menu' : 'open-menu'"
+>
   <div class="log">log</div>
-  ${uiMenu}
+  <Menu :isCollapse="systemStore.isCollapse">
+    <div v-for="menu in items" :key="menu.key">
+      <SubMenu
+        :menu="menu"
+        :isCollapse="systemStore.isCollapse"
+        v-if="menu.children && menu.children.length > 0"
+      />
+      <MenuItem v-else :menuItem="menu" />
+    </div>
+  </Menu>
 </div>`;
 };
 
 const css = (answers) => {
-  const { ui } = answers;
-  let addCss = ``;
-  if (ui === "element") {
-    addCss = `:deep(.el-menu) {
-  border: 0;
-}
-.my-menu {
-  padding: 0 4px 0 8px;
-  .is-active {
-    border-radius: 4px;
-    background-color: #1677ff;
-  }
-}`;
-  } else {
-    addCss = `:deep(.ant-menu-dark) {
-  background-color: transparent;
-}`;
-  }
-
   return `.aside {
+  transition: width 0.35s;
+  .close-menu {
+    width: 64px;
+  }
+  .open-menu {
+    width: 220px;
+  }
   .log {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 84px;
   }
-  ${addCss}
 }`;
 };
 

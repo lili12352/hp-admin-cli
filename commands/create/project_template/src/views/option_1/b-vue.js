@@ -1,10 +1,12 @@
-import { vueTemplate } from "../../../../../project_utils/index.js";
+import { vueTemplate } from "../../../../project_utils/index.js";
 
 const script = () => {
   return ``;
 };
 const html = (answers) => {
-  return `<router-view />`;
+  return `
+  <div>b</div>
+`;
 };
 
 const css = () => {
@@ -14,7 +16,7 @@ const createMain = (params) => {
   return vueTemplate(params.answers, script, html, css);
 };
 const createFileName = (variant) => {
-  return `index.vue`;
+  return `b.vue`;
 };
 export default {
   createFileName: createFileName,

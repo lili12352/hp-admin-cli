@@ -1,5 +1,15 @@
 const createTsconfig = () => {
-  return `/// <reference types="vite/client" />`;
+  return `/// <reference types="vite/client" />
+interface key {
+  [key: string]: any;
+}
+declare interface RouterRes {
+  path: string;
+  name: string;
+  meta: key;
+  component: string;
+  children?: Router | undefined;
+}`;
 };
 const createFileName = (answers) => {
   return `env.d.ts`;

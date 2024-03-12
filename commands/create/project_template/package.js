@@ -17,7 +17,8 @@ const ui = (type) => {
       devDependencies = `,
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0"`;
-      dependencies = `"element-plus": "^2.6.0"`;
+      dependencies = `"@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.6.0"`;
       break;
     case "antdv":
       dependencies = `"ant-design-vue": "^4.1.2"`;
@@ -113,6 +114,7 @@ export const createPackage = (params) => {
     "vue": "^3.4.19",
     "vue-router": "^4.3.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "axios": "^1.6.7",
     ${ui(answers.ui).dependencies}${i18n(answers.i18n)}
   },

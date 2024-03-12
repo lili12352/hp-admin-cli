@@ -6,6 +6,27 @@ export const getJavaScriptFileSuffix = (suffix) => {
   }
 };
 
+export const isTs = (text, variant) => {
+  if (variant === "TypeScript") {
+    return text;
+  } else {
+    return "";
+  }
+};
+
+export const vueTemplate = (answers, script, html, style) => {
+  return `${scriptTemplate(script(answers), answers.variant)}
+${htmlTemplate(html(answers))}
+${styleTemplate(style(answers), answers.css)}
+`;
+};
+
+export const isI18n = (type, text) => {
+  if (type) {
+    return `{{$t()}}`;
+  }
+};
+
 const scriptTemplate = (sTemplate, variant) => {
   return `<script setup lang="${getJavaScriptFileSuffix(variant)}">
 ${sTemplate}
@@ -23,17 +44,4 @@ const styleTemplate = (cTemplate, css) => {
   return `<style lang="${css}" scoped>
 ${cTemplate}
 </style>`;
-};
-
-export const vueTemplate = (answers, script, html, style) => {
-  return `${scriptTemplate(script(answers), answers.variant)}
-${htmlTemplate(html(answers))}
-${styleTemplate(style(answers), answers.css)}
-`;
-};
-
-export const isI18n = (type, text) => {
-  if (type) {
-    return `{{$t()}}`;
-  }
 };

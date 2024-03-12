@@ -5,9 +5,19 @@ const ui = (type) => {
   switch (type) {
     case "antdv":
       importUi = `import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';`;
-      useUi = `app.use(Antd)`;
+import 'ant-design-vue/dist/reset.css';
+import * as antdIconsVue from "@ant-design/icons-vue";`;
+      useUi = `app.use(Antd)
+for (const [key, component] of Object.entries(antdIconsVue)) {
+  app.component(key, component);
+}
+`;
       break;
+    case "element":
+      importUi = `import * as ElementPlusIconsVue from "@element-plus/icons-vue";`;
+      useUi = `for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}`;
     default:
       break;
   }
@@ -32,9 +42,8 @@ import { i18n } from "./lang/index";`;
 };
 
 const pinia = () => {
-  let importPinia = `import { createPinia } from "pinia";`;
-  let usePinia = `const pinia = createPinia();
-app.use(pinia);`;
+  let importPinia = `import { initStore } from "@/store/index"`;
+  let usePinia = `initStore(app);`;
   return {
     importPinia,
     usePinia,
@@ -49,6 +58,7 @@ const createMain = (params) => {
 import "./style.css";
 import App from "./App.vue";
 import router from "@/router";
+import "@/router/protector";
 ${importPinia}
 ${importUi}${importI18n}
 
