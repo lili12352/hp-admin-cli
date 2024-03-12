@@ -74,10 +74,11 @@ const html = (answers) => {
 };
 
 const css = (answers) => {
+  const { ui } = answers;
   return `.aside {
   transition: width 0.35s;
   .close-menu {
-    width: 64px;
+    width: ${ui === "element" ? "64" : "80"}px;
   }
   .open-menu {
     width: 220px;
