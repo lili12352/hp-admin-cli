@@ -82,6 +82,7 @@ const css = (answers) => {
   const { ui } = answers;
   if (ui === "element") {
     return `.el-menu-vertical-demo {
+  width: 100%;
   border: 0 !important;
 }`;
   } else {

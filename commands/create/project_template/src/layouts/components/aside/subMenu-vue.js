@@ -1,6 +1,8 @@
 import { vueTemplate, isTs } from "../../../../../project_utils/index.js";
 const script = (answers) => {
   return `import SvgIcon from "@/components/svgIcon/index.vue";
+import { useSystemStore } from "@/store/modules/system";
+const systemStore = useSystemStore();
 import MenuItem from "./menu-item.vue";
 const props = defineProps(["menu", "isCollapse"]);
 const styleIcon = {

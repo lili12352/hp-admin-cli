@@ -1,11 +1,13 @@
 import { vueTemplate } from "../../../../../project_utils/index.js";
 const script = (answers) => {
   return `import SvgIcon from "@/components/svgIcon/index.vue";
-  const props = defineProps(["menuItem"]);
-  const styleIcon = {
-    width: "16px",
-    height: "16px",
-  };`;
+import { useSystemStore } from "@/store/modules/system";
+const systemStore = useSystemStore();
+const props = defineProps(["menuItem"]);
+const styleIcon = {
+  width: "16px",
+  height: "16px",
+};`;
 };
 
 const html = (answers) => {
