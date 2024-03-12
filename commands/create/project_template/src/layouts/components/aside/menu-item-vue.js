@@ -10,16 +10,13 @@ const script = (answers) => {
 
 const html = (answers) => {
   const { ui } = answers;
-  if (ui === "element") {
-    return `<div class="my-menu">
-  <el-menu-item :index="props.menuItem.key" :key="props.menuItem.key">
+  const uiHtml = ui === "element" ? "el" : "a";
+  return `  <div class="my-menu">
+  <${uiHtml}-menu-item :index="props.menuItem.key" :key="props.menuItem.key">
     <SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
-    <template #title>{{ props.menuItem.label }}</template>
-  </el-menu-item>
+    <span v-if="!systemStore.isCollapse"> {{ props.menuItem.label }}</span>
+  </${uiHtml}-menu-item>
 </div>`;
-  } else {
-    return ``;
-  }
 };
 
 const css = (answers) => {

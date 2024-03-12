@@ -89,7 +89,7 @@ export const useUserInfoStore = defineStore({
       this.setUser({
         userName: "data",
         token: "d64406c94615a849a6cb0b71f3945879",
-        role: "admin",
+        role: "",
       });
     },
     async getUserInfo() {

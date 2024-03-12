@@ -1,7 +1,38 @@
 import { vueTemplate, isTs } from "../../../../../project_utils/index.js";
+
+const uiScript = (answers) => {
+  const { ui, variant } = answers;
+  if (ui === "element") {
+    return `const select = (v${isTs(": string", variant)}) => {
+  router.push(v);
+};`;
+  } else {
+    return `const openKeys = ref${isTs("<string[]>", variant)}([]);
+const getOpenKeys = (path${isTs(": string", variant)}) => {
+  if (systemStore.isCollapse) return;
+  const key = path.split("").reverse().join("");
+  const index = key.indexOf("/") + 1;
+  openKeys.value = [path.slice(0, key.length - index)];
+};
+getOpenKeys(router.currentRoute.value.fullPath);
+
+const select = (v${isTs(": any", variant)}) => {
+  defaultActive.value = v.key;
+  getOpenKeys(v.key);
+  router.push(v.key);
+};`;
+  }
+};
 const script = (answers) => {
+  const { ui } = answers;
   return `import { ref } from "vue";
 import { useRouter } from "vue-router";
+${
+  ui === "element"
+    ? ""
+    : `import { useSystemStore } from "@/store/modules/system";
+const systemStore = useSystemStore();`
+}
 const router = useRouter();
 const props = defineProps({
   isCollapse: {
@@ -12,9 +43,8 @@ const props = defineProps({
 });
 
 const defaultActive = ref(router.currentRoute.value.fullPath);
-const select = (v${isTs(": string", answers.variant)}) => {
-  router.push(v);
-};`;
+${uiScript(answers)}
+`;
 };
 
 const html = (answers) => {
@@ -35,7 +65,16 @@ const html = (answers) => {
   <slot />
 </el-menu>`;
   } else {
-    return ``;
+    return `<a-menu
+  :openKeys="openKeys"
+  :selectedKeys="[defaultActive]"
+  @select="select"
+  mode="inline"
+  theme="dark"
+  :inline-collapsed="props.isCollapse"
+>
+  <slot />
+</a-menu>`;
   }
 };
 

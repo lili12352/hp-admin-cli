@@ -11,17 +11,15 @@ const styleIcon = {
 
 const html = (answers) => {
   const { ui } = answers;
-  if (ui === "element") {
-    return `<el-sub-menu
+  const uiHtml = ui === "element" ? "el" : "a";
+  return `  <${uiHtml}-sub-menu
   :index="props.menu.key"
   v-if="menu.children && menu.children.length > 0"
+  :key="props.menu.key"
 >
-  <template #title v-if="isCollapse">
+  <template #title>
     <SvgIcon :iconName="menu.icon" :styleIcon="styleIcon" />
-  </template>
-  <template #title v-else>
-    <SvgIcon :iconName="menu.icon" :styleIcon="styleIcon" />
-    <span>{{ menu.label }}</span>
+    <span v-if="!systemStore.isCollapse">{{ menu.label }}</span>
   </template>
   <div class="my-menu">
     <MenuItem
@@ -30,10 +28,7 @@ const html = (answers) => {
       :menuItem="menuItem"
     />
   </div>
-</el-sub-menu>`;
-  } else {
-    return ``;
-  }
+</${uiHtml}-sub-menu>`;
 };
 
 const css = (answers) => {
