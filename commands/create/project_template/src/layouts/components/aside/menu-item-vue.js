@@ -10,13 +10,23 @@ const styleIcon = {
 };`;
 };
 
+const uiHtml = (ui) => {
+  if (ui === "element") {
+    return `<SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
+<template #title>
+  <span> {{ props.menuItem.label }}</span>
+</template>`;
+  } else {
+    return `<SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
+<span v-if="!systemStore.isCollapse"> {{ props.menuItem.label }}</span>`;
+  }
+};
 const html = (answers) => {
   const { ui } = answers;
   const uiHtml = ui === "element" ? "el" : "a";
   return `  <div class="my-menu">
   <${uiHtml}-menu-item :index="props.menuItem.key" :key="props.menuItem.key">
-    <SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
-    <span v-if="!systemStore.isCollapse"> {{ props.menuItem.label }}</span>
+    ${uiHtml(ui)}
   </${uiHtml}-menu-item>
 </div>`;
 };
