@@ -25,6 +25,24 @@ export const mappingData = {
     "el-button": {
       antdv: "a-button",
     },
+    "el-breadcrumb": {
+      antdv: "a-breadcrumb",
+    },
+    "el-breadcrumb-item": {
+      antdv: "a-breadcrumb-item",
+    },
+    "el-avatar": {
+      antdv: "a-avatar",
+    },
+    "el-dropdown": {
+      antdv: "a-dropdown",
+    },
+    "el-dropdown-menu": {
+      antdv: "a-menu",
+    },
+    "el-dropdown-item": {
+      antdv: "a-menu-item",
+    },
   },
   attributeMappings: {
     "el-menu": {

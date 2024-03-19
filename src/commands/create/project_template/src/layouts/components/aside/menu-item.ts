@@ -16,8 +16,7 @@ return {
         return ``;
       },
       antdv: function ui_1() {
-        return `import { useSystemStore } from "@/store/modules/system";
-        const systemStore = useSystemStore();`;
+        return ``;
       },
     },
   },

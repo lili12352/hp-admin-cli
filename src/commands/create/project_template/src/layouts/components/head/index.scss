@@ -1,13 +1,27 @@
 .header {
-  display: flex;
-  align-items: center;
   box-sizing: border-box;
-  .fold-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
+  .head-left {
+    flex: 1;
+    .fold-icon {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .head-right {
+    height: 100%;
+    .user-right {
+      position: relative;
+      margin: 0 10px;
+      span {
+        margin: 0 5px;
+        color: #606266;
+      }
+      .user-hove {
+        position: absolute;
+        left: 0;
+        top: 10px;
+      }
+    }
   }
 }
 //#end;

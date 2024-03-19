@@ -43,7 +43,11 @@ const routerList = [
   },
 ];
 interface State extends UserInfoParams {
+  userName: string;
+  token: string;
+  role: string;
   routerList: RouterRes[];
+  removeRouterList: any;
 }
 interface UserInfoParams {
   userName: string;
@@ -58,8 +62,21 @@ export const useUserInfoStore = defineStore({
     token: "",
     role: "",
     routerList: [],
+    removeRouterList: [],
   }),
   actions: {
+    dropLogin() {
+      this.userName = "";
+      this.token = "";
+      this.role = "";
+      this.routerList = [];
+      this.removeRouterList.forEach((item: Function) => item());
+      this.removeRouterList = [];
+    },
+    addRemoveRouterList(router: Function) {
+      this.removeRouterList.push(router);
+    },
+
     getToken() {
       return this.token;
     },
@@ -76,7 +93,7 @@ export const useUserInfoStore = defineStore({
     async login() {
       await mn(0);
       this.setUser({
-        userName: "data",
+        userName: "admin",
         token: "d64406c94615a849a6cb0b71f3945879",
         role: "",
       });

@@ -17,8 +17,10 @@ return {
       </template>`;
     },
     antdv: function () {
-      return `<SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
-      <span > {{ props.menuItem.label }}</span>`;
+      return `<template #icon>
+        <SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
+      </template>
+      <span> {{ props.menuItem.label }}</span>`;
     },
   },
 };

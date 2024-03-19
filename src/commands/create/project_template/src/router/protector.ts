@@ -33,7 +33,8 @@ router.beforeEach(async (to, _from, next) => {
       const routerList = asyncRouter(routerRes) as RouteRecordRaw[];
       routerList.forEach((item: RouteRecordRaw) => {
         // 注册动态路由
-        router.addRoute("/", item);
+        const routerFn = router.addRoute("/", item);
+        userInfoStore.addRemoveRouterList(routerFn);
       });
       return next(to.fullPath);
     }
