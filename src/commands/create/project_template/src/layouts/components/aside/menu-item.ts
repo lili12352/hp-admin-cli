@@ -1,4 +1,6 @@
 import SvgIcon from "@/components/svgIcon/index.vue";
+import { useSystemStore } from "@/store/modules/system";
+const systemStore = useSystemStore();
 const props = defineProps(["menuItem"]);
 const styleIcon = {
   width: "18px",
@@ -6,7 +8,7 @@ const styleIcon = {
 };
 //#end;
 () => {
-  console.log(styleIcon, props, SvgIcon);
+  console.log(styleIcon, props, SvgIcon, systemStore);
 };
 return {
   slot: {},
