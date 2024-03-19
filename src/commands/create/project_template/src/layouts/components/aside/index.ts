@@ -1,13 +1,11 @@
 import { ref } from "vue";
 import { useSystemStore } from "@/store/modules/system";
-import { useUserInfoStore } from "@/store/modules/user";
 
 import Menu from "./menu.vue";
 import SubMenu from "./subMenu.vue";
 import MenuItem from "./menu-item.vue";
 
 const systemStore = useSystemStore();
-const userInfoStore = useUserInfoStore();
 interface MenuList {
   key: string;
   label: string;
@@ -27,7 +25,7 @@ const getMenuList = (routerList: RouterRes[]): MenuList[] => {
     };
   });
 };
-const items = ref<MenuList[]>(getMenuList(userInfoStore.routerList));
+const items = ref<MenuList[]>(getMenuList(systemStore.routerList));
 //#end;
 () => {
   console.log(Menu, SubMenu, MenuItem, systemStore);

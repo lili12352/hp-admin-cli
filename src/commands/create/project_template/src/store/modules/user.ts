@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { store } from "../index";
+import { useSystemStoreWithOut } from "@/store/modules/system";
+const systemStoreWithOut = useSystemStoreWithOut();
 
 const mn = (time) => {
   return new Promise((res) => {
@@ -47,7 +49,6 @@ interface State extends UserInfoParams {
   token: string;
   role: string;
   routerList: RouterRes[];
-  removeRouterList: any;
 }
 interface UserInfoParams {
   userName: string;
@@ -62,7 +63,6 @@ export const useUserInfoStore = defineStore({
     token: "",
     role: "",
     routerList: [],
-    removeRouterList: [],
   }),
   actions: {
     dropLogin() {
@@ -70,11 +70,7 @@ export const useUserInfoStore = defineStore({
       this.token = "";
       this.role = "";
       this.routerList = [];
-      this.removeRouterList.forEach((item: Function) => item());
-      this.removeRouterList = [];
-    },
-    addRemoveRouterList(router: Function) {
-      this.removeRouterList.push(router);
+      systemStoreWithOut.resetSystem();
     },
 
     getToken() {
@@ -86,10 +82,6 @@ export const useUserInfoStore = defineStore({
       this.token = token;
       this.role = role;
     },
-    setRouterList(routerList: any) {
-      this.role = "admin";
-      this.routerList = routerList;
-    },
     async login() {
       await mn(0);
       this.setUser({
@@ -100,7 +92,8 @@ export const useUserInfoStore = defineStore({
     },
     async getUserInfo() {
       await mn(1000);
-      this.setRouterList(routerList);
+      this.role = "admin";
+      systemStoreWithOut.setRouterList(routerList);
       console.log("获取用户信息");
       return routerList;
     },

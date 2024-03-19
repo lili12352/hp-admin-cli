@@ -5,7 +5,7 @@
         //#hook_2
       </div>
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item">
+        <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
           <a v-if="index < breadcrumbList.length - 1">{{ item.name }}</a>
           <span v-else>{{ item.name }}</span>
         </el-breadcrumb-item>

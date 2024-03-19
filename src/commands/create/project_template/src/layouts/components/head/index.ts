@@ -3,6 +3,7 @@ import SvgIcon from "@/components/svgIcon/index.vue";
 import { useSystemStore } from "@/store/modules/system";
 import { useUserInfoStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
+import type { RouteRecordNormalized } from "vue-router";
 const systemStore = useSystemStore();
 const userInfoStore = useUserInfoStore();
 const router = useRouter();
@@ -22,7 +23,7 @@ const clickIcon = () => {
   systemStore.switchCollapse();
 };
 
-const breadcrumbList = ref([]);
+const breadcrumbList = ref<RouteRecordNormalized[]>([]);
 const routerList = router.getRoutes();
 watch(
   () => router.currentRoute.value.path,
