@@ -1,0 +1,20 @@
+.left-model {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+.aside {
+  height: 100vh;
+}
+.conter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1;
+}
+//#end;
+return {
+
+}

@@ -7,24 +7,16 @@
   "scripts": {
     "bd": "npm run build & npm run dev",
     "dev": "npm link & npm run clear:test & npm run cli",
-    "build": " npm run clear:build  & tsc & node index.js ",
+    "build": " npm run clear:build  && tsc && node index.js",
     "cli": "admin-cli-dev create test",
     "clear:test": "rimraf test",
     "clear:build": "rimraf build",
-    "copy": "node index.js"
+    "file": "node index.js"
   },
   "bin": {
-    "admin-cli": "./index.js",
-    "admin-cli-dev": "./build/index.js"
+    "admin-cli": "./index.js"
   },
-  "keywords": [
-    "vue",
-    "admin",
-    "自动构建",
-    "后台管理",
-    "脚手架",
-    "多版本"
-  ],
+  "keywords": ["vue", "admin", "自动构建", "后台管理", "脚手架", "多版本"],
   "author": {
     "name": "lhp",
     "email": "359664577@qq.com",
@@ -52,7 +44,6 @@
     "inquirer": "^9.2.15",
     "module-alias": "^2.2.3",
     "ora": "^8.0.1",
-    "pacote": "^17.0.6",
-    "vue": "^3.4.21"
+    "pacote": "^17.0.6"
   }
 }

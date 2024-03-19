@@ -1,0 +1,19 @@
+.aside {
+  transition: width 0.35s;
+  .close-menu {
+    width: 64px;
+  }
+  .open-menu {
+    width: 220px;
+  }
+  .log {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 84px;
+  }
+}
+//#end;
+return {
+
+}
