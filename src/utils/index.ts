@@ -1,7 +1,6 @@
 import fs from "fs-extra";
 import spawn from "cross-spawn";
 import chalk from "chalk";
-import { join } from "path";
 
 export const getFileList = (filesPath: string): Promise<string[]> => {
   return new Promise((res, rej) => {

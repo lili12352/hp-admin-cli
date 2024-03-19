@@ -46,7 +46,7 @@ export class ConvertVue {
       for (const [key, value] of Object.entries(slot)) {
         jsFile = jsFile.replace(
           `//#slot:${key}`,
-          this.extractFunctionBody(value[ui])
+          this.extractFunctionBody(value[ui]),
         );
       }
     }
@@ -56,7 +56,7 @@ export class ConvertVue {
         this.model.forEach((modelName: string) => {
           jsFile = jsFile.replace(
             `//#hook:${key}`,
-            this.extractFunctionBody(value[modelName])
+            this.extractFunctionBody(value[modelName]),
           );
         });
       }
@@ -70,7 +70,7 @@ export class ConvertVue {
     const { ui, css } = this.answers;
     const { oldF, fn } = await this._readTemplate(
       this.fileName + ".scss",
-      this.path
+      this.path,
     );
     let scssFile = oldF;
     const fnObj = new Function(fn)() || {};
@@ -95,7 +95,7 @@ export class ConvertVue {
      */
     const { oldF, fn } = await this._readTemplate(
       this.fileName + ".vue",
-      this.path
+      this.path,
     );
     let html = oldF;
 
@@ -212,7 +212,7 @@ const convertVue = (str: string, mappingData: any, ui: string) => {
                   } else if (value && key) {
                     newLabel = newLabel.replace(
                       `${sourceKey}=${attributeValue}`,
-                      `${key}=${value}`
+                      `${key}=${value}`,
                     );
                   }
                 }
@@ -237,7 +237,7 @@ const convertVue = (str: string, mappingData: any, ui: string) => {
 const addSupplement = (
   newLabel: string,
   sourceTab: string,
-  ui: string
+  ui: string,
 ): string => {
   const supplement = mappingData.attributeMappings[sourceTab]?.supplement;
   let add = "";
