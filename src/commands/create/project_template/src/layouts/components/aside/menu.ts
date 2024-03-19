@@ -11,9 +11,7 @@ const props = defineProps({
 });
 //#slot:ui_2
 const defaultActive = ref(router.currentRoute.value.fullPath);
-const select = (v: string) => {
-  router.push(v);
-};
+
 //#end;
 () => {
   console.log(select, defaultActive, props);
