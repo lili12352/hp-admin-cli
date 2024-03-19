@@ -8,6 +8,7 @@ import { ConvertVue } from "./utils/convertVue.js";
 import { createViteConfig } from "./utils/viteConfig.js";
 import { createPackage } from "./utils/packageConfig.js";
 import { fileURLToPath } from "url";
+import spawn from "cross-spawn";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -22,6 +23,11 @@ const userQuestions = (projectName: string) => {
         checkboxObj[key] = checkbox.includes(key);
       });
       createTemplates({ ...answers, ...checkboxObj, projectName });
+      console.log(chalk.blue("项目创建完毕"));
+      console.log(chalk.blue(`cd ${projectName}`));
+      console.log(chalk.blue("npm install"));
+
+      const child = spawn("npm", ["run", "prettier"]);
     })
     .catch((error) => {
       if (error.isTtyError) {
@@ -43,7 +49,7 @@ const createTemplates = async (answers: any) => {
 const projectCopy = async (
   templatePath: string,
   projectName: string,
-  answers
+  answers,
 ) => {
   const { variant, eslint } = answers;
   const files = await fs.readdir(join(__dirname, templatePath), {
@@ -70,14 +76,14 @@ const projectCopy = async (
     const targetPath = join(
       process.cwd(),
       projectName,
-      path.split(templatePath)[1]
+      path.split(templatePath)[1],
     );
     const fileName = item.name;
     // 处理src下文件
     if (fileName === "src") {
       fs.ensureDirSync(join(process.cwd(), projectName, "src"));
       readFileList(join(__dirname, templatePath, "src"), answers).then(
-        (fileList: string[]) => {}
+        (fileList: string[]) => {},
       );
     }
     // ts
@@ -99,7 +105,7 @@ const projectCopy = async (
           targetPath.replace(".eslintrc_ts", ".eslintrc"),
           (err) => {
             if (err) throw err;
-          }
+          },
         );
       }
       if (variant !== "TypeScript" && fileName === ".eslintrc_js.cjs") {
@@ -108,7 +114,7 @@ const projectCopy = async (
           targetPath.replace(".eslintrc_js", ".eslintrc"),
           (err) => {
             if (err) throw err;
-          }
+          },
         );
       }
     }
@@ -125,15 +131,15 @@ const projectCopy = async (
     join(
       process.cwd(),
       projectName,
-      `vite.config.${variant === "TypeScript" ? "ts" : "js"}`
+      `vite.config.${variant === "TypeScript" ? "ts" : "js"}`,
     ),
-    viteConfigData
+    viteConfigData,
   );
   // 追加写入package文件
   const createPackageData = createPackage(answers);
   fs.outputFileSync(
     join(process.cwd(), projectName, "package.json"),
-    createPackageData
+    createPackageData,
   );
 };
 
@@ -151,7 +157,7 @@ const readFileList = async (path, answers) => {
     const targetPath = join(
       process.cwd(),
       projectName,
-      filedir.split(templatePath)[1]
+      filedir.split(templatePath)[1],
     );
     if (dirent.isFile()) {
       // 处理文件
@@ -181,7 +187,7 @@ const fileWrite = (path, files, projectName, templatePath, answers) => {
       const targetPath = join(
         process.cwd(),
         projectName,
-        filedir.split(templatePath)[1]
+        filedir.split(templatePath)[1],
       );
       fs.copyFile(filedir, targetPath);
     });
@@ -191,7 +197,7 @@ const fileWrite = (path, files, projectName, templatePath, answers) => {
       const targetPath = join(
         process.cwd(),
         projectName,
-        filedir.split(templatePath)[1]
+        filedir.split(templatePath)[1],
       );
       const fileName = item.name.replace(extname(item.name), "");
       if (vueFileNameList.includes(fileName)) {
@@ -222,7 +228,7 @@ const action = (projectName: string) => {
     })
     .catch(() => {
       console.log(
-        chalk.red(`项目名可能已存在，请更换项目名或者删除文件夹${projectName}`)
+        chalk.red(`项目名可能已存在，请更换项目名或者删除文件夹${projectName}`),
       );
     });
 };

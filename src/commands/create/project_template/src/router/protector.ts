@@ -1,5 +1,5 @@
 import router from "./index";
-  import { useUserInfoStoreWithOut } from "@/store/modules/user";
+import { useUserInfoStoreWithOut } from "@/store/modules/user";
 import isWhiteListPage from "@/config/white-list";
 import { type RouteRecordRaw } from "vue-router";
 

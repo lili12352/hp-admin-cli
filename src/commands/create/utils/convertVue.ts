@@ -139,13 +139,13 @@ export class ConvertVue {
       .replace(/}\s*$/, "}");
 
     if (functionBody) {
-      // 去除前后可能存在的空格，并返回函数体内容
-      return functionBody
+      const fn = functionBody
         .trim()
         .slice(1, functionBody.length - 1)
         .split(";")
         .map((item) => item.trim())
         .join(";\n");
+      return new Function(fn)() || "";
     } else {
       throw new Error("Unable to extract function body");
     }

@@ -3,7 +3,7 @@ import "./style.css";
 import App from "./App.vue";
 import router from "@/router";
 import "@/router/protector";
-import { initStore } from "@/store/index"
+import { initStore } from "@/store/index";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
 const app = createApp(App);
@@ -15,4 +15,3 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 router.isReady().then(() => {
   app.mount("#app");
 });
- 

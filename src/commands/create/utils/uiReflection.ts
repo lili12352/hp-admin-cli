@@ -43,7 +43,7 @@ export const mappingData = {
             "selectedKeys",
             `"[${value
               .replace(/\"/g, "")
-              .replace(/\/n/g, "")}]" \n   :openKeys="openKeys" \n`
+              .replace(/\/n/g, "")}]" \n   :openKeys="openKeys" \n`,
           ),
       },
       "text-color": {

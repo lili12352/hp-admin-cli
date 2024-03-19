@@ -9,7 +9,7 @@ const props = defineProps({
     required: true,
   },
 });
-//#slot:ui_1
+//#slot:ui_2
 const defaultActive = ref(router.currentRoute.value.fullPath);
 const select = (v: string) => {
   router.push(v);
@@ -24,7 +24,7 @@ return {
       element: function ui_1() {
         return ``;
       },
-      antd: function ui_1() {
+      antdv: function ui_1() {
         return `import { useSystemStore } from "@/store/modules/system";
         const systemStore = useSystemStore();`;
       },
@@ -35,7 +35,7 @@ return {
           router.push(v);
         };`;
       },
-      antd: function ui_1() {
+      antdv: function ui_1() {
         return `const openKeys = ref<string[]>([]);
         const getOpenKeys = (path: string) => {
           if (systemStore.isCollapse) return;

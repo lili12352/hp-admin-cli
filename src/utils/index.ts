@@ -32,7 +32,7 @@ export const createFolder = (path: string): Promise<string[]> => {
 
 export const installDependencies = (
   path: string,
-  command: string
+  command: string,
 ): Promise<any> => {
   return new Promise((res, rej) => {
     const dependencies = ["ejs@3.1.8"];

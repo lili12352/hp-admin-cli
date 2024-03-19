@@ -6,5 +6,5 @@ console.log(
     verticalLayout: "default",
     width: 140,
     whitespaceBreak: true,
-  })
+  }),
 );

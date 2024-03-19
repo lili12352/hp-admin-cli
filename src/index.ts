@@ -18,7 +18,7 @@ const start = async () => {
         import(`./commands/${fileName}/index.js`).then((data) => {
           res(data);
         });
-      })
+      }),
     );
   });
   Promise.all(filePromise).then((res) => {
