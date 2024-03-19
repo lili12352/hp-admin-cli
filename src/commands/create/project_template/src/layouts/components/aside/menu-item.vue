@@ -12,7 +12,9 @@ return {
   hook_1: {
     element: function () {
       return ` <SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
-      <span v-if="!systemStore.isCollapse"> {{ props.menuItem.label }}</span>`;
+      <template #title>
+        <span> {{ props.menuItem.label }}</span>
+      </template>`;
     },
     antdv: function () {
       return `<SvgIcon :iconName="props.menuItem.icon" :styleIcon="styleIcon" />
