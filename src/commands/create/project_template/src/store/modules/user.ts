@@ -10,8 +10,8 @@ const mn = (time: number) => {
 };
 const routerList = [
   {
-    path: "/a",
-    name: "系统管理",
+    path: "/home",
+    name: "首页",
     meta: { icon: "ChatLineSquare" },
     component: "../views/home.vue",
   },

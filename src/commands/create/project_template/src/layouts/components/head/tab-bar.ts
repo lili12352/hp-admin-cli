@@ -29,6 +29,10 @@ const clickScroll = (number: number) => {
 const goRouter = (path: string) => {
   router.push(path);
 };
+const styleIcon = {
+  width: "10px",
+  height: "10px",
+};
 //#end;
 () => {
   console.log(SvgIcon);

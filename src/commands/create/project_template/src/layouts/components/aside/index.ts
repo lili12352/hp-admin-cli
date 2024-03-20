@@ -20,7 +20,7 @@ const getMenuList = (routerList: RouterRes[]): MenuList[] => {
       key: router.path,
       label: router.name,
       title: router.path,
-      icon: router.meta.icon,
+      icon: router?.meta?.icon,
       children: getMenuList(router.children),
     };
   });
