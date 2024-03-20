@@ -74,6 +74,7 @@ export const questionsList = [
       {
         name: "i18n国际化",
         value: "i18n",
+        disabled: "国际化正在开发中",
       },
       {
         name: "多主题",
@@ -85,17 +86,7 @@ export const questionsList = [
         value: "layout",
         disabled: "多布局正在开发中",
       },
-      {
-        name: "用户管理",
-        value: "user",
-        disabled: "用户管理正在开发中",
-      },
-      {
-        name: "权限管理",
-        value: "authority",
-        disabled: "权限管理正在开发中",
-      },
     ],
-    default: ["eslint", "i18n"],
+    default: ["eslint"],
   },
 ];

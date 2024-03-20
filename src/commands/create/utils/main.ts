@@ -50,7 +50,7 @@ const pinia = () => {
 };
 export const createMain = (answers) => {
   const { importUi, useUi } = ui(answers.ui);
-  // const { importI18n, useI18n } = i18n(answers.i18n);
+  const { importI18n, useI18n } = i18n(answers.i18n);
   const { importPinia, usePinia } = pinia();
   return `import { createApp } from "vue";
 import "./style.css";
@@ -59,10 +59,10 @@ import router from "@/router";
 import "@/router/protector";
 ${importPinia}
 ${importUi}
-
+${importI18n}
 const app = createApp(App);
 ${usePinia}
-app.use(router);
+app.use(router)${useI18n};
 ${useUi}
 router.isReady().then(() => {
   app.mount("#app");
