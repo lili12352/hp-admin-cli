@@ -13,13 +13,15 @@
         </el-breadcrumb>
       </div>
       <div class="head-right flex-align">
+        <div class="flex-align">
+              //#hook_3
+            </div>
         <el-dropdown>
           <div class="user-right flex-align">
             <el-avatar :size="30" src="" />
             <span>{{ userInfoStore.userName }}</span>
           </div>
           <template //#hook_1>
-
             <el-dropdown-menu>
               <el-dropdown-item @click="clickGoGithub">github</el-dropdown-item>
               <el-dropdown-item divided @click="dropLogin"
@@ -60,6 +62,37 @@ return {
               systemStore.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'
             "
             :styleIcon="styleIcon"
+          />`;
+      },
+    },
+    hook_3: {
+      element: function () {
+        return `<SvgIcon
+                v-if="screen"
+                @click="clickFullscreen"
+                iconName="fullscreen-exit"
+                :styleIcon="styleIcon"
+              />
+              <SvgIcon
+                v-else
+                @click="clickFullscreen"
+                iconName="FullScreen"
+                :styleIcon="styleIcon"
+              />`;
+      },
+      antdv: function () {
+        return `<SvgIcon
+                v-if="screen"
+                @click="clickFullscreen"
+                iconName="CompressOutlined"
+                :styleIcon="styleIcon"
+              />
+              <SvgIcon
+                v-else
+                @click="clickFullscreen"
+                iconName="ExpandOutlined"
+                :styleIcon="styleIcon"
+              />"
           />`;
       },
     },

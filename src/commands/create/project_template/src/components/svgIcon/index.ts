@@ -9,6 +9,7 @@ const props = defineProps({
     default: () => ({
       width: "12px",
       height: "12px",
+      fontSize: "12px",
     }),
   },
 });

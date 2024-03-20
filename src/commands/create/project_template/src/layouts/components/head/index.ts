@@ -5,12 +5,15 @@ import { useUserInfoStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import type { RouteRecordNormalized } from "vue-router";
 import TabBar from "./tab-bar.vue";
+import { useScreen } from "@/utils/hooks/useScreen";
+const { clickFullscreen, screen } = useScreen();
 const systemStore = useSystemStore();
 const userInfoStore = useUserInfoStore();
 const router = useRouter();
 const styleIcon = {
-  width: "22px",
-  height: "22px",
+  width: "18px",
+  height: "18px",
+  fontSize: "18px",
 };
 
 const clickGoGithub = () => {
