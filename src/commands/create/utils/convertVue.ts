@@ -170,11 +170,18 @@ const conditionalCompilation = (fn: string, oldF: string, answers: any) => {
   }
   try {
     const conditional = new Function(fnStr)();
-    for (const [key, value] of Object.entries(conditional)) {
-      newF = newF.replace(`//#${key}`, conditional[key][ui]());
+    // 功能
+    if (conditional && conditional.hook) {
+      console.log("功能");
+    }
+    // ui不同
+    if (conditional && conditional.slot) {
+      for (const [key, value] of Object.entries(conditional.slot)) {
+        newF = newF.replace(`//#${key}`, conditional.slot[key][ui]());
+      }
     }
   } catch (err) {
-    console.log("html文件错误", err);
+    console.log("html文件错误", newF);
   }
   return newF;
 };

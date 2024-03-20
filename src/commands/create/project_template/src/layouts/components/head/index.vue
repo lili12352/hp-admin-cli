@@ -38,29 +38,32 @@
 //#end;
 <script>
 return {
-  hook_1: {
-    element: function () {
-      return `#dropdown`;
+  slot:{
+    hook_1: {
+      element: function () {
+        return `#dropdown`;
+      },
+      antdv: function () {
+        return `#overlay`;
+      },
     },
-    antdv: function () {
-      return `#overlay`;
+    hook_2: {
+      element: function () {
+        return `<SvgIcon
+            :iconName="systemStore.isCollapse ? 'Expand' : 'Fold'"
+            :styleIcon="styleIcon"
+          />`;
+      },
+      antdv: function () {
+        return `<SvgIcon
+            :iconName="
+              systemStore.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'
+            "
+            :styleIcon="styleIcon"
+          />`;
+      },
     },
-  },
-  hook_2: {
-    element: function () {
-      return `<SvgIcon
-          :iconName="systemStore.isCollapse ? 'Expand' : 'Fold'"
-          :styleIcon="styleIcon"
-        />`;
-    },
-    antdv: function () {
-      return `<SvgIcon
-          :iconName="
-            systemStore.isCollapse ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'
-          "
-          :styleIcon="styleIcon"
-        />`;
-    },
-  },
+  }
+
 };
 </script>

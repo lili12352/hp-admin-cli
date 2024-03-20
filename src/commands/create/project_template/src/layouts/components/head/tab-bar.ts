@@ -32,6 +32,7 @@ const goRouter = (path: string) => {
 const styleIcon = {
   width: "10px",
   height: "10px",
+  fontSize: "10px",
 };
 //#end;
 () => {
