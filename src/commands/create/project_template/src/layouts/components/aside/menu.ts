@@ -1,5 +1,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useSystemStore } from "@/store/modules/system";
+const systemStore = useSystemStore();
 //#slot:ui_1
 const router = useRouter();
 const props = defineProps({
@@ -9,6 +11,15 @@ const props = defineProps({
     required: true,
   },
 });
+const addTabBar = (path: string) => {
+  const routerList = router.getRoutes();
+  const tab = routerList.find((item: any) => item.path === path);
+  if (!tab) return;
+  systemStore.addTabBar({
+    path: tab.path,
+    name: tab.name,
+  });
+};
 //#slot:ui_2
 const defaultActive = ref(router.currentRoute.value.fullPath);
 
@@ -31,6 +42,7 @@ return {
       element: function ui_1() {
         return `const select = (v: string) => {
           router.push(v);
+          addTabBar(v);
         };`;
       },
       antdv: function ui_1() {
@@ -47,6 +59,7 @@ return {
           defaultActive.value = v.key;
           getOpenKeys(v.key);
           router.push(v.key);
+          addTabBar(v.key);
         };`;
       },
     },

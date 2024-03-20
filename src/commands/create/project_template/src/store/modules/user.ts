@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
 import { store } from "../index";
-import { useSystemStoreWithOut } from "@/store/modules/system";
-const systemStoreWithOut = useSystemStoreWithOut();
 
-const mn = (time) => {
+const mn = (time: number) => {
   return new Promise((res) => {
     setTimeout(() => {
       res("1");
@@ -70,7 +68,6 @@ export const useUserInfoStore = defineStore({
       this.token = "";
       this.role = "";
       this.routerList = [];
-      systemStoreWithOut.resetSystem();
     },
 
     getToken() {
@@ -93,7 +90,7 @@ export const useUserInfoStore = defineStore({
     async getUserInfo() {
       await mn(1000);
       this.role = "admin";
-      systemStoreWithOut.setRouterList(routerList);
+
       console.log("获取用户信息");
       return routerList;
     },

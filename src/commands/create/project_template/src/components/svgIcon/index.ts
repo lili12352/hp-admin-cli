@@ -6,6 +6,10 @@ const props = defineProps({
   },
   styleIcon: {
     type: Object,
+    default: () => ({
+      width: "12px",
+      height: "12px",
+    }),
   },
 });
 //#end;

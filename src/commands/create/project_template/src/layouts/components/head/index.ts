@@ -4,6 +4,7 @@ import { useSystemStore } from "@/store/modules/system";
 import { useUserInfoStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import type { RouteRecordNormalized } from "vue-router";
+import TabBar from "./tab-bar.vue";
 const systemStore = useSystemStore();
 const userInfoStore = useUserInfoStore();
 const router = useRouter();
@@ -17,6 +18,7 @@ const clickGoGithub = () => {
 };
 const dropLogin = () => {
   userInfoStore.dropLogin();
+  systemStore.resetSystem();
   router.push("/login");
 };
 const clickIcon = () => {
@@ -43,7 +45,7 @@ watch(
 );
 //#end;
 () => {
-  console.log(SvgIcon, iconName, styleIcon, clickIcon);
+  console.log(SvgIcon, TabBar);
 };
 return {
   slot: {},

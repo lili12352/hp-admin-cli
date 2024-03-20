@@ -1,6 +1,7 @@
 import router from "./index";
 import { useUserInfoStoreWithOut } from "@/store/modules/user";
 import { useSystemStore } from "@/store/modules/system";
+import { useSystemStoreWithOut } from "@/store/modules/system";
 import isWhiteListPage from "@/config/white-list";
 import { type RouteRecordRaw } from "vue-router";
 
@@ -31,7 +32,9 @@ router.beforeEach(async (to, _from, next) => {
   try {
     if (!userInfoStore.role) {
       const systemStore = useSystemStore();
+      const systemStoreWithOut = useSystemStoreWithOut();
       const routerRes = await userInfoStore.getUserInfo();
+      systemStoreWithOut.setRouterList(routerRes);
       const routerList = asyncRouter(routerRes) as RouteRecordRaw[];
       routerList.forEach((item: RouteRecordRaw) => {
         // 注册动态路由
