@@ -43,6 +43,9 @@ export const mappingData = {
     "el-dropdown-item": {
       antdv: "a-menu-item",
     },
+    "el-tooltip": {
+      antdv: "a-tooltip",
+    },
   },
   attributeMappings: {
     "el-menu": {
@@ -90,5 +93,10 @@ export const mappingData = {
       },
     },
     "el-menu-item": {},
+    "el-tooltip": {
+      content: {
+        antdv: (value) => new Attribute("", ""),
+      },
+    },
   },
 };

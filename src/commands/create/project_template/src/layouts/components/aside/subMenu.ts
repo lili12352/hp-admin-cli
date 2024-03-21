@@ -4,8 +4,9 @@ const systemStore = useSystemStore();
 import MenuItem from "./menu-item.vue";
 const props = defineProps(["menu", "isCollapse"]);
 const styleIcon = {
-  width: "16px",
-  height: "16px",
+  width: "20px",
+  height: "20px",
+  fontSize: "20px",
 };
 //#end;
 () => {

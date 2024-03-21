@@ -1,6 +1,6 @@
-import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useSystemStore } from "@/store/modules/system";
+//#slot:ui_1
 const systemStore = useSystemStore();
 const router = useRouter();
 const props = defineProps({
@@ -28,12 +28,32 @@ const defaultActive = ref(router.currentRoute.value.fullPath);
 };
 return {
   slot: {
+    ui_1: {
+      element: function ui_1() {
+        return `import { ref, watch } from "vue";
+        import { getCssValue } from "@/utils/index";`;
+      },
+      antdv: function ui_1() {
+        return `import { ref } from "vue";`;
+      },
+    },
     ui_2: {
       element: function ui_1() {
         return `const select = (v: string) => {
           router.push(v);
           addTabBar(v);
-        };`;
+        };
+        const textColor = ref("");
+        const backgroundColor = ref("");
+        watch(
+          () => systemStore.themeValue,
+          () => {
+            textColor.value = getCssValue("--them-menu-font-color");
+            backgroundColor.value = getCssValue("--them-menu-bg-color");
+          },
+          { immediate: true },
+        );
+        `;
       },
       antdv: function ui_1() {
         return `const openKeys = ref<string[]>([]);

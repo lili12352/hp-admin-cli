@@ -10,9 +10,16 @@
   }
   .head-right {
     height: 100%;
+    .tooltip {
+      margin: 0 10px;
+    }
     .user-right {
       position: relative;
       margin: 0 10px;
+      .user-name {
+        margin: 0 5px;
+        color: var(--them-head-font-color);
+      }
       span {
         margin: 0 5px;
         color: #606266;

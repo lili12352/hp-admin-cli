@@ -10,9 +10,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 84px;
+    height: 80px;
+    background-color: var(--them-logo-bg-color);
   }
 }
+//#hook_1
+
 //#end;
 return {
+  hook_1:{
+    element:function(){
+      return ``
+    },
+    antdv:function(){
+      return `:deep(.ant-menu-dark) {
+        & > .ant-menu {
+          background-color: var(--them-menu-bg-color) !important;
+        }
+      }`
+    }
+  }
 }

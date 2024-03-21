@@ -42,7 +42,8 @@ body {
   justify-content: center;
 }
 
-.el-tooltip__trigger:focus-visible {
+.el-tooltip__trigger:focus-visible,
+.tooltip:focus {
   outline: unset;
 }
 

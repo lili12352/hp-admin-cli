@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { store } from "../index";
 import router from "@/router";
 interface State {
+  themeValue: string;
   isCollapse: boolean;
   removeRouterList: any;
   routerList: any;
@@ -10,6 +11,7 @@ interface State {
 export const useSystemStore = defineStore({
   id: "system",
   state: (): State => ({
+    themeValue: "normal",
     isCollapse: false,
     removeRouterList: [],
     routerList: [],
@@ -58,7 +60,7 @@ export const useSystemStore = defineStore({
     },
   },
   persist: {
-    paths: ["isCollapse", "routerList", "tabBarList"],
+    paths: ["isCollapse", "routerList", "tabBarList", "themeValue"],
   },
 });
 

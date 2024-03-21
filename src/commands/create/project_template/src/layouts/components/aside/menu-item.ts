@@ -2,8 +2,9 @@ import SvgIcon from "@/components/svgIcon/index.vue";
 //#slot:ui_1
 const props = defineProps(["menuItem"]);
 const styleIcon = {
-  width: "18px",
-  height: "18px",
+  width: "20px",
+  height: "20px",
+  fontSize: "20px",
 };
 //#end;
 () => {

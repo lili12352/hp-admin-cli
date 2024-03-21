@@ -1,10 +1,11 @@
 <template>
   <el-menu
+    :class="{ 'a-menu': props.isCollapse }"
     :collapse-transition="false"
     :collapse="props.isCollapse"
     active-text-color="#ffffff"
-    text-color="#ffffffa6"
-    background-color="#1a1a1a"
+    :text-color="textColor"
+    :background-color="backgroundColor"
     class="el-menu-vertical-demo"
     :default-active="defaultActive"
     :show-timeout="0"
