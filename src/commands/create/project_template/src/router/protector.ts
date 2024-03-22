@@ -11,7 +11,7 @@ const asyncRouter = (routerList: RouterRes[]): RouteRecordRaw[] => {
   return routerList.map((r: RouterRes) => ({
     path: r.path,
     name: r.name,
-    component: () => import(r.component),
+    component: () => import(/* @vite-ignore */ r.component),
     children: asyncRouter(r.children),
   }));
 };
