@@ -58,10 +58,12 @@ import App from "./App.vue";
 import router from "@/router";
 import "@/router/protector";
 import "@/styles/index.scss";
+import { signSvgIcon } from "@/components/svgIcon/icon";
 ${importPinia}
 ${importUi}
 ${importI18n}
 const app = createApp(App);
+signSvgIcon(app);
 ${usePinia}
 app.use(router)${useI18n};
 ${useUi}

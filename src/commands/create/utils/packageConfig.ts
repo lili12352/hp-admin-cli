@@ -47,6 +47,7 @@ const eslintWrite = (answers) => {
   if (!eslint) return "";
   if (variant === "TypeScript") {
     return `,
+    "vite-plugin-eslint": "^1.8.1",
     "@vue/eslint-config-typescript": "^12.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
@@ -58,6 +59,7 @@ const eslintWrite = (answers) => {
     "vue-eslint-parser": "^9.4.2"`;
   } else {
     return `,
+    "vite-plugin-eslint": "^1.8.1",
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

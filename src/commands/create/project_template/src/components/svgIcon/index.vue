@@ -10,6 +10,10 @@ const props = defineProps({
     default: "",
     required: true,
   },
+  color: {
+    type: String,
+    default: "",
+  },
   styleIcon: {
     type: Object,
     default: () => ({
@@ -26,7 +30,9 @@ const textColor = ref("");
 watch(
   () => systemStore.themeValue,
   () => {
-    textColor.value = getCssValue("--them-head-font-color");
+    textColor.value = props.color
+      ? props.color
+      : getCssValue("--them-head-font-color");
   },
   { immediate: true },
 );

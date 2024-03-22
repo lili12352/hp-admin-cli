@@ -55,6 +55,7 @@ module.exports = {
     "vue/require-default-prop": "off",
     "vue/require-explicit-emits": "off",
     "vue/multi-word-component-names": "off",
+    "vue/no-v-model-argument": "off",
     "vue/html-self-closing": [
       "error",
       {

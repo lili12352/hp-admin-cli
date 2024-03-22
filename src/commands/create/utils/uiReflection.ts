@@ -46,6 +46,12 @@ export const mappingData = {
     "el-tooltip": {
       antdv: "a-tooltip",
     },
+    "el-form": {
+      antdv: "a-form",
+    },
+    "el-form-item": {
+      antdv: "a-form-item",
+    },
   },
   attributeMappings: {
     "el-menu": {
@@ -96,6 +102,16 @@ export const mappingData = {
     "el-tooltip": {
       content: {
         antdv: (value) => new Attribute("", ""),
+      },
+    },
+    "el-form-item": {
+      prop: {
+        antdv: (value) => new Attribute("name", ""),
+      },
+    },
+    "el-input": {
+      "v-model": {
+        antdv: (value) => new Attribute("v-model:value", ""),
       },
     },
   },

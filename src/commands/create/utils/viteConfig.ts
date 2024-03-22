@@ -48,13 +48,28 @@ const css = (type) => {
   },`;
   }
 };
+const eslint = (answers) => {
+  const { eslint } = answers;
+  if (!eslint)
+    return {
+      eslintImportModel: "",
+      eslintUseModel: "",
+    };
+  return {
+    eslintImportModel: `import eslint from "vite-plugin-eslint";`,
+    eslintUseModel: `eslint(),`,
+  };
+};
 export const createViteConfig = (answers) => {
+  const { eslintImportModel, eslintUseModel } = eslint(answers);
   return `import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import svgLoader from "vite-svg-loader";
 ${ui(answers.ui).importStr}
+${eslintImportModel}
 import { resolve } from "path";
+
 const root = process.cwd();
 function pathResolve(dir) {
   return resolve(root, '.', dir);
@@ -65,6 +80,7 @@ export default defineConfig((configEnv)=>{
   return {
     plugins: [
       vue(),
+      ${eslintUseModel}
       svgLoader(),
       createSvgIconsPlugin({
         iconDirs: [resolve(process.cwd(), "src/icons/svg")],
