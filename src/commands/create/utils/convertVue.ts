@@ -61,6 +61,7 @@ export class ConvertVue {
         });
       }
     }
+    if (!jsFile) return "";
     return `<script lang="${variant === "TypeScript" ? "ts" : "js"}" setup>
   ${jsFile}
 </script>
@@ -80,6 +81,7 @@ export class ConvertVue {
       }
     }
     const cssSymbol = css === "scss" ? "$" : "@";
+    if (!scssFile) return "";
     return `<style lang="${css}" scoped>
   ${scssFile.replace(/\$/g, cssSymbol)}
   </style>`;

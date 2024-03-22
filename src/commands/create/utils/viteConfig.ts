@@ -51,6 +51,8 @@ const css = (type) => {
 export const createViteConfig = (answers) => {
   return `import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue"
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import svgLoader from "vite-svg-loader";
 ${ui(answers.ui).importStr}
 import { resolve } from "path";
 const root = process.cwd();
@@ -63,6 +65,11 @@ export default defineConfig((configEnv)=>{
   return {
     plugins: [
       vue(),
+      svgLoader(),
+      createSvgIconsPlugin({
+        iconDirs: [resolve(process.cwd(), "src/icons/svg")],
+        symbolId: "[name]",
+      }),
       ${ui(answers.ui).plugins}
     ],
     ${css(answers.css)}

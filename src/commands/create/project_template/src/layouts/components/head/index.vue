@@ -36,6 +36,20 @@
 
         <el-tooltip :content="screen ? '退出' : '全屏'" placement="bottom">
           //#hook_3
+          <SvgIcon
+            v-if="screen"
+            @click="clickFullscreen"
+            iconName="#fullscreen-exit"
+            class="tooltip"
+            :styleIcon="styleIcon"
+          />
+          <SvgIcon
+            v-else
+            @click="clickFullscreen"
+            iconName="#full-screen"
+            class="tooltip"
+            :styleIcon="styleIcon"
+          />
         </el-tooltip>
 
         <el-dropdown>
@@ -90,39 +104,12 @@ return {
     },
     hook_3: {
       element: function () {
-        return `<SvgIcon
-                v-if="screen"
-                @click="clickFullscreen"
-                iconName="fullscreen-exit"
-                class="tooltip"
-                :styleIcon="styleIcon"
-              />
-              <SvgIcon
-                v-else
-                @click="clickFullscreen"
-                iconName="FullScreen"
-                class="tooltip"
-                :styleIcon="styleIcon"
-              />`;
+        return ``;
       },
       antdv: function () {
         return `<template #title>
             <span>{{ screen ? "退出" : "全屏" }}</span>
-          </template>
-          <SvgIcon
-          class="tooltip"
-            v-if="screen"
-            @click="clickFullscreen"
-            iconName="CompressOutlined"
-            :styleIcon="styleIcon"
-          />
-          <SvgIcon
-            v-else
-            @click="clickFullscreen"
-            iconName="ExpandOutlined"
-            class="tooltip"
-            :styleIcon="styleIcon"
-          />`;
+          </template>`;
       },
     },
     hook_4: {

@@ -119,6 +119,8 @@ export const createPackage = (answers) => {
     ${ui(answers.ui).dependencies}${i18n(answers.i18n)}
   },
   "devDependencies": {
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-svg-loader": "^5.1.0",
     ${lang(answers.variant)}${ui(answers.ui).devDependencies},
     ${css(answers.css)}${eslintWrite(answers)}
   }
