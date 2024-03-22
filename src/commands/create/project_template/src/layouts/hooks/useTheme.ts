@@ -20,6 +20,10 @@ const themeList = [
     name: "白色",
     value: "light",
   },
+  {
+    name: "炫彩",
+    value: "florid",
+  },
 ];
 // const themeValue = ref("normal");
 switchThemeColor(systemStore.themeValue);
