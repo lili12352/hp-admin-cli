@@ -8,9 +8,9 @@
         <el-breadcrumb separator="/">
           <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
             <a class="breadcrumb" v-if="index < breadcrumbList.length - 1">{{
-              item.name
+              item.meta.title 
             }}</a>
-            <span class="breadcrumb" v-else>{{ item.name }}</span>
+            <span class="breadcrumb" v-else>{{ item.meta.title  }}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
