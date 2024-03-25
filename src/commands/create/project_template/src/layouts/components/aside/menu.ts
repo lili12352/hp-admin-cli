@@ -61,7 +61,20 @@ return {
           if (systemStore.isCollapse) return;
           const key = path.split("").reverse().join("");
           const index = key.indexOf("/") + 1;
-          openKeys.value = [path.slice(0, key.length - index)];
+          const keyPath = path.slice(0, key.length - index);
+          const array: string[] = [];
+          keyPath
+            .split("/")
+            .filter((item) => item)
+            .map((item) => "/" + item)
+            .reduce((a, b) => {
+              if (array.length === 0) {
+                array.push(a);
+              }
+              array.push(a + b);
+              return a + b;
+            });
+          openKeys.value = array;
         };
         getOpenKeys(router.currentRoute.value.fullPath);
         
