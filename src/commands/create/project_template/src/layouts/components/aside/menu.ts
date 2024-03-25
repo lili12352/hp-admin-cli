@@ -63,6 +63,10 @@ return {
           const index = key.indexOf("/") + 1;
           const keyPath = path.slice(0, key.length - index);
           const array: string[] = [];
+          if (!keyPath) {
+            openKeys.value = ["/"];
+            return;
+          }
           keyPath
             .split("/")
             .filter((item) => item)
