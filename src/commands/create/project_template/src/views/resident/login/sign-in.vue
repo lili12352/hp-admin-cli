@@ -3,6 +3,7 @@ import { reactive, ref } from "vue";
 import { useUserInfoStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import type { FormRules, FormInstance } from "element-plus";
+import { userLoginApi } from "@/api/user";
 const userInfoStore = useUserInfoStore();
 const router = useRouter();
 const styleIcon = {
@@ -40,8 +41,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   formEl
     .validate()
     .then(async () => {
-      await userInfoStore.login();
+      const { data } = await userLoginApi(loginForm);
+      const { userName, token, nickName } = data;
+      userInfoStore.login({
+        userName,
+        token,
+        nickName,
+      });
       loadingFlag.value = false;
+
       router.push("/");
     })
     .catch((fields) => {

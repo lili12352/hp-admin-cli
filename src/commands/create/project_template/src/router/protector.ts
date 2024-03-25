@@ -4,6 +4,7 @@ import { useSystemStore } from "@/store/modules/system";
 import { useSystemStoreWithOut } from "@/store/modules/system";
 import isWhiteListPage from "@/config/white-list";
 import { type RouteRecordRaw } from "vue-router";
+import { getUserInfoApi } from "@/api/user";
 
 // 动态路由
 const asyncRouter = (routerList: RouterRes[]): RouteRecordRaw[] => {
@@ -21,6 +22,8 @@ router.beforeEach(async (to, _from, next) => {
   if (!userInfoStore.token) {
     // 判断是否在免登录的白名单内
     if (!isWhiteListPage(to.fullPath)) {
+      console.log("没登录");
+
       return next("/login");
     } else {
       return next();
@@ -31,6 +34,9 @@ router.beforeEach(async (to, _from, next) => {
   }
   try {
     if (!userInfoStore.role) {
+      const { data }: any = await getUserInfoApi();
+      userInfoStore.setUserInfo(data.role, data.routerList);
+      console.log("获取信息", data);
       const systemStore = useSystemStore();
       const systemStoreWithOut = useSystemStoreWithOut();
       const routerRes = await userInfoStore.getUserInfo();
@@ -45,6 +51,8 @@ router.beforeEach(async (to, _from, next) => {
     }
     next();
   } catch {
+    console.log("错误");
+
     next();
   }
 });

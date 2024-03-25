@@ -5,13 +5,11 @@
 @import url("./florid.scss");
 
 :root {
-  
   .aside {
     color: var(--them-menu-font-color);
     height: 100%;
     background-color: var(--them-menu-bg-color);
-    box-shadow: -5px 0px 18px 0px rgba(0,0,0,.1);
-   
+    box-shadow: -5px 0px 18px 0px rgba(0, 0, 0, 0.1);
   }
   .head-lay {
     box-sizing: border-box;

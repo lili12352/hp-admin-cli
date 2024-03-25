@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import { switchThemeColor } from "@/utils/index";
 import { useSystemStoreWithOut } from "@/store/modules/system";
+
 const systemStore = useSystemStoreWithOut();
 const themeList = [
   {
@@ -25,7 +26,6 @@ const themeList = [
     value: "florid",
   },
 ];
-// const themeValue = ref("normal");
 switchThemeColor(systemStore.themeValue);
 const command = (v: string) => {
   systemStore.themeValue = v;

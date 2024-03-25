@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useUserInfoStoreWithOut } from "@/store/modules/user";
+import { getLocalStorage } from "@/utils/index";
+import { UserInfoParams } from "@/store/modules/user";
+// import { useUserInfoStore } from "@/store/modules/user";
 
-const userInfoStoreWithOut = useUserInfoStoreWithOut();
+// const userInfoStoreWithOut = useUserInfoStore();
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 10000,
@@ -17,10 +19,9 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (request) => {
-    const { token } = userInfoStoreWithOut;
-    if (token) {
-      request.headers.Authorization = token ? "Bearer " + token : undefined;
-    }
+    const userLocal = getLocalStorage<UserInfoParams>("user");
+    const { token } = userLocal || ({} as UserInfoParams);
+    request.headers.Authorization = token ? "Bearer " + token : undefined;
     return request;
   },
   (err) => {

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { store } from "../index";
 import router from "@/router";
+
 interface State {
   themeValue: string;
   isCollapse: boolean;

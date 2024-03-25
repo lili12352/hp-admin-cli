@@ -1,62 +1,22 @@
 import { defineStore } from "pinia";
 import { store } from "../index";
-
-const mn = (time: number) => {
-  return new Promise((res) => {
-    setTimeout(() => {
-      res("1");
-    }, time);
-  });
-};
-const routerList = [
-  {
-    path: "/home",
-    name: "首页",
-    meta: { icon: "ChatLineSquare" },
-    component: "../views/home.vue",
-  },
-  {
-    path: "/option",
-    name: "参数一",
-    component: "../layouts/components/main/index.vue",
-    meta: { icon: "ChatLineSquare" },
-    children: [
-      {
-        path: "/option/a",
-        name: "参数二",
-        component: "../views/option_1/a.vue",
-        meta: { icon: "ChatLineSquare" },
-      },
-      {
-        path: "/option/b",
-        name: "参数三",
-        component: "../views/option_1/b.vue",
-        meta: { icon: "ChatLineSquare" },
-      },
-      {
-        path: "/option/c",
-        name: "参数四",
-        component: "../views/option_1/c.vue",
-        meta: { icon: "ChatLineSquare" },
-      },
-    ],
-  },
-];
-interface State extends UserInfoParams {
+export interface State extends UserInfoParams {
   userName: string;
   token: string;
   role: string;
   routerList: RouterRes[];
 }
-interface UserInfoParams {
+export interface UserInfoParams {
+  nickName: string;
   userName: string;
   token: string;
-  role: string;
+  role?: string;
 }
 
 export const useUserInfoStore = defineStore({
   id: "user",
   state: (): State => ({
+    nickName: "",
     userName: "",
     token: "",
     role: "",
@@ -69,34 +29,25 @@ export const useUserInfoStore = defineStore({
       this.role = "";
       this.routerList = [];
     },
-
     getToken() {
       return this.token;
     },
-    setUser(params: UserInfoParams) {
-      const { userName, token, role } = params;
+    login(params: UserInfoParams) {
+      const { userName, token, nickName } = params;
       this.userName = userName;
       this.token = token;
-      this.role = role;
+      this.nickName = nickName;
     },
-    async login() {
-      await mn(0);
-      this.setUser({
-        userName: "admin",
-        token: "d64406c94615a849a6cb0b71f3945879",
-        role: "",
-      });
+    setUserInfo(role: string, routerList: any) {
+      this.role = role;
+      this.routerList = routerList;
     },
     async getUserInfo() {
-      await mn(1000);
-      this.role = "admin";
-
-      console.log("获取用户信息");
-      return routerList;
+      return this.routerList;
     },
   },
   persist: {
-    paths: ["userName", "token"],
+    paths: ["nickName", "userName", "token"],
   },
 });
 
