@@ -18,7 +18,7 @@ const getMenuList = (routerList: RouterRes[]): MenuList[] => {
   return routerList.map((router: RouterRes): MenuList => {
     return {
       key: router.path,
-      label: router.name,
+      label: router.meta.title,
       title: router.path,
       icon: router?.meta?.icon,
       children: getMenuList(router.children),

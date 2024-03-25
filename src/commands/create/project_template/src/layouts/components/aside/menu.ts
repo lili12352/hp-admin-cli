@@ -16,7 +16,7 @@ const addTabBar = (path: string) => {
   if (!tab) return;
   systemStore.addTabBar({
     path: tab.path,
-    name: tab.name,
+    name: tab.meta.title,
   });
 };
 //#slot:ui_2
