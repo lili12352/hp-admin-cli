@@ -1,11 +1,3 @@
-<script lang="ts" setup>
-import SingIn from "./sign-in.vue";
-const styleIcon = {
-  width: "400px",
-  height: "500px",
-  fontSize: "18px",
-};
-</script>
 <template>
   <div class="login flex-center">
     <div class="login-center flex-center">
