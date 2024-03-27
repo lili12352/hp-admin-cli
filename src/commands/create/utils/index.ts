@@ -81,13 +81,12 @@ export const questionsList = [
   },
   {
     type: "checkbox",
-    name: "checkbox",
+    name: "modelCheckbox",
     message: "请选择需要的模块（多选、默认全选）",
     choices: [
       {
         name: "echars",
         value: "echarts",
-        disabled: "echarts正在开发中",
       },
       {
         name: "three.js",
@@ -95,6 +94,6 @@ export const questionsList = [
         disabled: "three.js正在开发中",
       },
     ],
-    default: ["eslint"],
+    default: ["echarts"],
   },
 ];

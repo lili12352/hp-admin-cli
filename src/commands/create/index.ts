@@ -22,11 +22,15 @@ const userQuestions = (projectName: string) => {
     .prompt(questionsList)
     .then((answers: any) => {
       spinner.start();
-      const { checkbox } = answers;
+      const { checkbox, modelCheckbox } = answers;
+      const modelCheckboxList = ["echarts", "three"];
       const checkboxList = ["eslint", "i18n"];
       const checkboxObj = {};
       checkboxList.forEach((key) => {
         checkboxObj[key] = checkbox.includes(key);
+      });
+      modelCheckboxList.forEach((key) => {
+        checkboxObj[key] = modelCheckbox.includes(key);
       });
       createTemplates({ ...answers, ...checkboxObj, projectName });
 

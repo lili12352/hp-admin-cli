@@ -96,6 +96,15 @@ const i18n = (type) => {
   }
 };
 
+const echarts = (type) => {
+  if (type) {
+    return `,
+    "echarts": "^5.5.0"`;
+  } else {
+    return "";
+  }
+};
+
 export const createPackage = (answers) => {
   const { projectName } = answers;
   return `{
@@ -118,7 +127,7 @@ export const createPackage = (answers) => {
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "axios": "^1.6.7",
-    ${ui(answers.ui).dependencies}${i18n(answers.i18n)}
+    ${ui(answers.ui).dependencies}${i18n(answers.i18n)}${echarts(answers.echarts)}
   },
   "devDependencies": {
     "vite-plugin-svg-icons": "^2.0.1",

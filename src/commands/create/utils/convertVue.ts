@@ -52,13 +52,21 @@ export class ConvertVue {
     }
     // 模块
     if (hook) {
-      for (const [key, value] of Object.entries(hook)) {
-        this.model.forEach((modelName: string) => {
-          jsFile = jsFile.replace(
-            `//#hook:${key}`,
-            this.extractFunctionBody(value[modelName]),
-          );
-        });
+      for (const [key, hookValue] of Object.entries(hook)) {
+        for (const [paramsKey, value] of Object.entries(this.answers)) {
+          if (paramsKey === key) {
+            if (value) {
+              try {
+                console.log(`//#hook:${key}`);
+
+                jsFile = jsFile.replace(`//#hook:${key}`, hookValue[ui]());
+              } catch {
+                console.log("异常");
+              }
+            }
+          }
+        }
+        this.model.forEach((modelName: string) => {});
       }
     }
     if (!jsFile) return "";

@@ -39,7 +39,7 @@ return {
     },
     ui_2: {
       element: function ui_1() {
-        return `const select = (v: string) => {
+        return `const select = (v) => {
           router.push(v);
           addTabBar(v);
         };
@@ -57,12 +57,12 @@ return {
       },
       antdv: function ui_1() {
         return `const openKeys = ref<string[]>([]);
-        const getOpenKeys = (path: string) => {
+        const getOpenKeys = (path) => {
           if (systemStore.isCollapse) return;
           const key = path.split("").reverse().join("");
           const index = key.indexOf("/") + 1;
           const keyPath = path.slice(0, key.length - index);
-          const array: string[] = [];
+          const array= [];
           if (!keyPath) {
             openKeys.value = ["/"];
             return;
@@ -82,7 +82,7 @@ return {
         };
         getOpenKeys(router.currentRoute.value.fullPath);
         
-        const select = (v: any) => {
+        const select = (v) => {
           defaultActive.value = v.key;
           getOpenKeys(v.key);
           router.push(v.key);
