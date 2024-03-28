@@ -53,20 +53,24 @@ export class ConvertVue {
     // 模块
     if (hook) {
       for (const [key, hookValue] of Object.entries(hook)) {
-        for (const [paramsKey, value] of Object.entries(this.answers)) {
-          if (paramsKey === key) {
-            if (value) {
-              try {
-                console.log(`//#hook:${key}`);
-
-                jsFile = jsFile.replace(`//#hook:${key}`, hookValue[ui]());
-              } catch {
-                console.log("异常");
-              }
+        if (!hookValue && typeof hookValue !== "object") continue;
+        for (const [modelKey, modelValue] of Object.entries(hookValue)) {
+          if (!this.answers[modelKey]) {
+            if (modelValue["FALSE"]) {
+              jsFile = jsFile.replace(`//#hook:${key}`, modelValue["FALSE"]());
+            } else {
+              jsFile = jsFile.replace(`//#hook:${key}`, "");
             }
+
+            continue;
           }
+          if (modelValue["HOOK"]) {
+            jsFile = jsFile.replace(`//#hook:${key}`, modelValue["HOOK"]());
+            continue;
+          }
+          if (!modelValue[ui]) continue;
+          jsFile = jsFile.replace(`//#hook:${key}`, modelValue[ui]());
         }
-        this.model.forEach((modelName: string) => {});
       }
     }
     if (!jsFile) return "";
@@ -111,7 +115,13 @@ export class ConvertVue {
 
     html = conditionalCompilation(fn, oldF, this.answers);
 
-    return this.readHtml(html, mappingData);
+    html = this.readHtml(html, mappingData);
+
+    if (!this.answers["i18n"]) {
+      html = removeI18(html);
+    }
+
+    return html;
   }
 
   private async _readTemplate(fileName: string, path: string) {
@@ -181,8 +191,29 @@ const conditionalCompilation = (fn: string, oldF: string, answers: any) => {
   try {
     const conditional = new Function(fnStr)();
     // 功能
-    if (conditional && conditional.hook) {
-      console.log("功能");
+    if (conditional && conditional.model) {
+      for (const [key, keyValue] of Object.entries(conditional.model)) {
+        if (!keyValue) continue;
+        for (const [modelKey, modelValue] of Object.entries(keyValue)) {
+          // ============
+          if (!answers[modelKey]) {
+            if (modelValue["FALSE"]) {
+              newF = newF.replace(`//#${key}`, modelValue["FALSE"]());
+            } else {
+              newF = newF.replace(`//#${key}`, "");
+            }
+
+            continue;
+          }
+          if (modelValue["HOOK"]) {
+            newF = newF.replace(`//#${key}`, modelValue["HOOK"]());
+            continue;
+          }
+          if (!modelValue[ui]) continue;
+          newF = newF.replace(`//#${key}`, modelValue[ui]());
+          // ===========
+        }
+      }
     }
     // ui不同
     if (conditional && conditional.slot) {
@@ -294,4 +325,19 @@ const getTabAttribute = (tab: string) => {
     }
   });
   return attributeList;
+};
+
+const removeI18 = (html: string) => {
+  if (!html.includes("$t(")) return html;
+  let newHtml = html;
+  const start = html.indexOf("$t(");
+  const end = html.indexOf(")", start);
+  const action = html.slice(start + 3, end);
+  const replace = html.slice(start, end + 1);
+  newHtml = newHtml.replace(replace, action);
+  if (newHtml.includes("$t")) {
+    return removeI18(newHtml);
+  } else {
+    return newHtml;
+  }
 };

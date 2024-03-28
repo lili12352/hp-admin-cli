@@ -31,7 +31,7 @@ const i18n = (type) => {
   let useI18n = "";
   if (type) {
     importI18n = `
-import { i18n } from "./lang/index";`;
+import { i18n } from "./lang/lang";`;
     useI18n = ".use(i18n)";
   }
   return {

@@ -6,11 +6,14 @@
   >
     <template #title>
       <SvgIcon :iconName="menu.icon" :styleIcon="styleIcon" />
-      <span v-if="!systemStore.isCollapse">{{ menu.label }}</span>
+      <span v-if="!systemStore.isCollapse || props.view">{{
+        $t(menu.label)
+      }}</span>
     </template>
 
     <div v-for="menuItem in menu.children" :key="menuItem.key">
       <SubMenu
+        :view="true"
         :menu="menuItem"
         :isCollapse="systemStore.isCollapse"
         v-if="menuItem.children && menuItem.children.length > 0"

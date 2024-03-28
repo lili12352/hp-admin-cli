@@ -8,13 +8,14 @@
         <el-breadcrumb separator="/">
           <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
             <a class="breadcrumb" v-if="index < breadcrumbList.length - 1">{{
-              item.meta.title 
+               $t(item.title)
             }}</a>
-            <span class="breadcrumb" v-else>{{ item.meta.title  }}</span>
+            <span class="breadcrumb" v-else>{{  $t(item.title) }}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="head-right flex-align">
+        //#model_1
 
         <el-tooltip placement="bottom" content="主题">
           <el-dropdown trigger="click">
@@ -136,6 +137,44 @@ return {
         return `#overlay`;
       },
     },
+    hook_6: {
+      element: function () {
+        return `#dropdown`;
+      },
+      antdv: function () {
+        return `#overlay`;
+      },
+    },
+  },
+  model:{
+    model_1:{
+      i18n: {
+        HOOK: function () {
+          return `<el-dropdown>
+          <SvgIcon
+            class="tooltip"
+            iconName="#duoyuyan"
+            :styleIcon="styleIcon"
+          />
+          <template //#hook_6>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                :disabled="systemStore.lang === item.value"
+                v-for="item in i18List"
+                :key="item.value"
+                @click="checkI18(item.value)"
+              >
+                {{ item.name }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>`;
+        },
+        FALSE:function(){
+          return ""
+        }
+      },
+    }
   }
 
 };

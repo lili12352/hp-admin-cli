@@ -2,7 +2,7 @@ import SvgIcon from "@/components/svgIcon/index.vue";
 import { useSystemStore } from "@/store/modules/system";
 const systemStore = useSystemStore();
 import MenuItem from "./menu-item.vue";
-const props = defineProps(["menu", "isCollapse"]);
+const props = defineProps(["menu", "isCollapse", "view"]);
 const styleIcon = {
   width: "20px",
   height: "20px",

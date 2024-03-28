@@ -1,5 +1,6 @@
 import { useRouter } from "vue-router";
 import { useSystemStore } from "@/store/modules/system";
+//#hook:hook_1
 //#slot:ui_1
 const systemStore = useSystemStore();
 const router = useRouter();
@@ -14,9 +15,10 @@ const addTabBar = (path: string) => {
   const routerList = router.getRoutes();
   const tab = routerList.find((item: any) => item.path === path);
   if (!tab) return;
+  //#hook:hook_2
   systemStore.addTabBar({
     path: tab.path,
-    name: tab.meta.title,
+    //#hook:hook_3
   });
 };
 //#slot:ui_2
@@ -91,5 +93,28 @@ return {
       },
     },
   },
-  hook: {},
+  hook: {
+    hook_1: {
+      i18n: {
+        HOOK: function () {
+          return `import useI18n from "../../hooks/useLang";
+          const { menuSwitchesToLang } = useI18n();`;
+        },
+      },
+    },
+    hook_2: {
+      i18n: {
+        HOOK: function () {
+          return `const title = menuSwitchesToLang(tab.meta.title as string);`;
+        },
+      },
+    },
+    hook_3: {
+      i18n: {
+        HOOK: function () {
+          return `name: title,`;
+        },
+      },
+    },
+  },
 };

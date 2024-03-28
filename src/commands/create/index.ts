@@ -206,17 +206,24 @@ const isCopyFile = (answers, file) => {
   const { variant } = answers;
   const filePostfix = variant === "TypeScript" ? ".ts" : ".js";
   const modelFile = {
-    echarts: "userEcharts" + filePostfix,
+    echarts: [`userEcharts${filePostfix}`],
+    i18n: [
+      `useI18${filePostfix}`,
+      "en.json",
+      "zh-CN.json",
+      `lang${filePostfix}`,
+      `useLang${filePostfix}`,
+    ],
   };
+  let flag = true;
   for (const [key, value] of Object.entries(modelFile)) {
-    if (value === file) return true;
-    if (typeof answers[key] === "boolean") return true;
-    if (answers[key]) {
-      return true;
-    } else {
+    if (!value.includes(file)) continue;
+    if (typeof answers[key] === "boolean" && !answers[key]) {
+      flag = false;
       return false;
     }
   }
+  return flag;
 };
 
 const fileWrite = (path, files, projectName, templatePath, answers) => {

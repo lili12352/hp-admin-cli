@@ -11,7 +11,8 @@
           v-for="tabKey in systemStore.tabBarList"
           :key="tabKey.path"
           @click="goRouter(tabKey.path)"
-          >{{ tabKey.name }}
+        >
+          {{ $t(tabKey.name) }}
           <div
             v-if="tabKey.path !== '/home'"
             class="close flex-center"

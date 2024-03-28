@@ -3,6 +3,7 @@ import { store } from "../index";
 import router from "@/router";
 
 interface State {
+  lang: string;
   themeValue: string;
   isCollapse: boolean;
   removeRouterList: any;
@@ -12,6 +13,7 @@ interface State {
 export const useSystemStore = defineStore({
   id: "system",
   state: (): State => ({
+    lang: "",
     themeValue: "normal",
     isCollapse: false,
     removeRouterList: [],
@@ -24,6 +26,9 @@ export const useSystemStore = defineStore({
     ],
   }),
   actions: {
+    setLang(lang: any) {
+      this.lang = lang;
+    },
     addTabBar(tab: any) {
       const find = this.tabBarList.find((item: any) => item.path === tab.path);
       if (find) return;
@@ -61,7 +66,7 @@ export const useSystemStore = defineStore({
     },
   },
   persist: {
-    paths: ["isCollapse", "routerList", "tabBarList", "themeValue"],
+    paths: ["isCollapse", "routerList", "tabBarList", "themeValue", "lang"],
   },
 });
 

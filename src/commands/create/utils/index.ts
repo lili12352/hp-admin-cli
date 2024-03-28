@@ -74,7 +74,7 @@ export const questionsList = [
       {
         name: "i18n国际化",
         value: "i18n",
-        disabled: "国际化正在开发中",
+        // disabled: "国际化正在开发中",
       },
     ],
     default: ["eslint"],
