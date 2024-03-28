@@ -2,13 +2,18 @@ import { defineStore } from "pinia";
 import { store } from "../index";
 import router from "@/router";
 
+interface TabBar {
+  path: string;
+  name: string;
+}
+
 interface State {
   lang: string;
   themeValue: string;
   isCollapse: boolean;
-  removeRouterList: any;
-  routerList: any;
-  tabBarList: any;
+  removeRouterList: Function[];
+  routerList: RouterRes[];
+  tabBarList: TabBar[];
 }
 export const useSystemStore = defineStore({
   id: "system",
@@ -29,14 +34,16 @@ export const useSystemStore = defineStore({
     setLang(lang: any) {
       this.lang = lang;
     },
-    addTabBar(tab: any) {
-      const find = this.tabBarList.find((item: any) => item.path === tab.path);
+    addTabBar(tab: TabBar) {
+      const find = this.tabBarList.find(
+        (item: TabBar) => item.path === tab.path,
+      );
       if (find) return;
       this.tabBarList.push(tab);
     },
     delTabbar(path: string) {
       this.tabBarList = this.tabBarList.filter(
-        (item: any) => item.path !== path,
+        (item: TabBar) => item.path !== path,
       );
       if (
         path === window.location.hash.replace("#", "") &&
