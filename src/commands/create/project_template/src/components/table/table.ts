@@ -1,17 +1,5 @@
 //#slot:ui_1
-interface Data {
-  [key: string]: any;
-}
-interface Colum {
-  title: string;
-  dataIndex: string;
-  key: string;
-}
-
-const props = defineProps<{
-  dataSource: Data[];
-  colums: Colum[];
-}>();
+const props = defineProps(["dataSource", "colums"]);
 //#end;
 
 return {

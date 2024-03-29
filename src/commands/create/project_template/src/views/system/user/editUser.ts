@@ -3,16 +3,7 @@ import userVModel from "@/hooks/userVModel";
 import type { FormInstance } from "element-plus";
 const emit = defineEmits(["update:form", "update:state"]);
 
-interface Data {
-  [key: string]: any;
-}
-const props = defineProps<{
-  form: Data;
-  state: {
-    show: boolean;
-    status: "edit" | "add";
-  };
-}>();
+const props = defineProps(["form", "state"]);
 
 const form = userVModel(props, "form", emit);
 const state = userVModel(props, "state", emit);
