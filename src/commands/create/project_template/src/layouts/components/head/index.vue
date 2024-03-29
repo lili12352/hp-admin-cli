@@ -19,7 +19,11 @@
 
         <el-tooltip placement="bottom" content="主题">
           <el-dropdown trigger="click">
-            //#hook_4
+            <SvgIcon
+              class="tooltip"
+              iconName="#MagicStick"
+              :styleIcon="styleIcon"
+            />
             <template //#hook_5>
               <el-dropdown-menu>
                 <el-dropdown-item
@@ -111,22 +115,6 @@ return {
         return `<template #title>
             <span>{{ screen ? "退出" : "全屏" }}</span>
           </template>`;
-      },
-    },
-    hook_4: {
-      element: function () {
-        return `<SvgIcon
-              class="tooltip"
-              iconName="MagicStick"
-              :styleIcon="styleIcon"
-            />`;
-      },
-      antdv: function () {
-        return `<SvgIcon
-            class="tooltip"
-            iconName="BgColorsOutlined"
-            :styleIcon="styleIcon"
-          />`;
       },
     },
     hook_5: {

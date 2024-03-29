@@ -72,7 +72,8 @@ return {
             .map((item) => "/" + item);
           if (pathList.length > 1) {
             pathList.reduce((a, b) => {
-              array.length === 0 ? array.push(a) : array.push(a + b);
+              if (array.length === 0) array.push(a);
+              array.push(a + b);
               return a + b;
             });
             openKeys.value = array;
