@@ -41,9 +41,10 @@ const userQuestions = (projectName: string) => {
 
       child.on("close", function (code) {
         if (code !== 0) {
-          console.log(chalk.blue("项目创建完毕"));
-          console.log(chalk.blue(`cd ${projectName}`));
-          console.log(chalk.blue("npm install"));
+          console.log("\n");
+          console.log(chalk.cyanBright("项目创建完毕"));
+          console.log(chalk.cyanBright(`cd ${projectName}`));
+          console.log(chalk.cyanBright("npm install"));
           spinner.stop(); // 停止
           spinner.succeed("Loading succeed"); // 成功 ✔
         } else {

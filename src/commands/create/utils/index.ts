@@ -65,7 +65,7 @@ export const questionsList = [
   {
     type: "checkbox",
     name: "checkbox",
-    message: "请选择需要的功能（多选、默认全选）",
+    message: "请选择需要的功能（多选）",
     choices: [
       {
         name: "eslint and Prettier",
@@ -82,7 +82,7 @@ export const questionsList = [
   {
     type: "checkbox",
     name: "modelCheckbox",
-    message: "请选择需要的模块（多选、默认全选）",
+    message: "请选择需要的模块（多选）",
     choices: [
       {
         name: "echars",
