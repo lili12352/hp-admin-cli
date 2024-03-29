@@ -1,6 +1,6 @@
 {
   "name": "hp-admin-cli",
-  "version": "0.1.0",
+  "version": "0.0.6",
   "description": "一款能根据需求自动配置vue后台管理的脚手架",
   "main": "index.ts",
   "type": "module",

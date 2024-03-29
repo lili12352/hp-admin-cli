@@ -18,22 +18,22 @@ const getFileListAndIncludes = (startUrl, destUrl) => {
           if (extname(file) !== ".ts") {
             const copyToJs = destUrl.replace(
               "project_template_ts",
-              "project_template",
+              "project_template"
             );
             fs.ensureDirSync(copyToJs); // 确保文件夹存在
             filePromiseAll.push(
-              fs.copyFile(join(startUrl, file), join(copyToJs, file)),
+              fs.copyFile(join(startUrl, file), join(copyToJs, file))
             );
           }
           filePromiseAll.push(
-            fs.copyFile(join(startUrl, file), join(destUrl, file)),
+            fs.copyFile(join(startUrl, file), join(destUrl, file))
           );
         }
         if (isDir) {
           fs.mkdir(join(destUrl, file)).then(() => {
             getFileListAndIncludes(
               join(startUrl, file),
-              join(destUrl, file),
+              join(destUrl, file)
             ).then((filePromiseAll) => {
               Promise.all(filePromiseAll);
             });
@@ -52,12 +52,19 @@ fs.readFile(join("./", "package.json"), function (err, data) {
   });
 });
 
+fs.readFile(join("./", "README.md"), function (err, data) {
+  if (err) throw err;
+  fs.writeFile(join("./", "build", "README.md"), data, function (err) {
+    if (err) throw err;
+  });
+});
+
 const destUrl = join(
   cwdUrl,
   "build",
   "commands",
   "create",
-  "project_template_ts",
+  "project_template_ts"
 );
 
 // 复制ts文件
@@ -65,7 +72,7 @@ fs.mkdir(destUrl).then(() => {
   getFileListAndIncludes(
     join(cwdUrl, "src", "commands", "create", "project_template"),
     destUrl,
-    false,
+    false
   ).then((filePromiseAll) => {
     Promise.all(filePromiseAll);
   });
