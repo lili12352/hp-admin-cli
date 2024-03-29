@@ -5,8 +5,8 @@
         <div class="user flex">
           <img src="/image/star-squashed.jpg" class="user-img" />
           <div class="user-info flex">
-            <div class="user-name">Admin</div>
-            <div class="user-role">管理员</div>
+            <div class="user-name">{{ userInfoStore.userName }}</div>
+            <div class="user-role">{{ userInfoStore.role }}</div>
           </div>
         </div>
         <div class="user-login-time">上次登录时间 12点13分</div>

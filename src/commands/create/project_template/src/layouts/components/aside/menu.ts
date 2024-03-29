@@ -64,23 +64,21 @@ return {
           const key = path.split("").reverse().join("");
           const index = key.indexOf("/") + 1;
           const keyPath = path.slice(0, key.length - index);
-          const array= [];
-          if (!keyPath) {
-            openKeys.value = ["/"];
-            return;
-          }
-          keyPath
+          if (!keyPath) return (openKeys.value = ["/"]);
+          const array = [];
+          const pathList = keyPath
             .split("/")
             .filter((item) => item)
-            .map((item) => "/" + item)
-            .reduce((a, b) => {
-              if (array.length === 0) {
-                array.push(a);
-              }
-              array.push(a + b);
+            .map((item) => "/" + item);
+          if (pathList.length > 1) {
+            pathList.reduce((a, b) => {
+              array.length === 0 ? array.push(a) : array.push(a + b);
               return a + b;
             });
-          openKeys.value = array;
+            openKeys.value = array;
+          } else {
+            openKeys.value = pathList;
+          }
         };
         getOpenKeys(router.currentRoute.value.fullPath);
         
@@ -105,7 +103,7 @@ return {
     hook_2: {
       i18n: {
         HOOK: function () {
-          return `const title = menuSwitchesToLang(tab.meta.title as string);`;
+          return `const title = menuSwitchesToLang(tab.meta.title);`;
         },
       },
     },
@@ -113,6 +111,9 @@ return {
       i18n: {
         HOOK: function () {
           return `name: title,`;
+        },
+        FALSE: function () {
+          return `name:tab.meta.title`;
         },
       },
     },

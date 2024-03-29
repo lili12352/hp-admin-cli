@@ -52,6 +52,9 @@ export const mappingData = {
     "el-form-item": {
       antdv: "a-form-item",
     },
+    "el-dialog": {
+      antdv: "a-modal",
+    },
   },
   attributeMappings: {
     "el-menu": {
@@ -112,6 +115,11 @@ export const mappingData = {
     "el-input": {
       "v-model": {
         antdv: (value) => new Attribute("v-model:value", ""),
+      },
+    },
+    "el-dialog": {
+      "v-model": {
+        antdv: (value) => new Attribute("v-model:open", ""),
       },
     },
   },

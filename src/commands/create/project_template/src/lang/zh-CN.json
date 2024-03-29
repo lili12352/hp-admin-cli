@@ -3,6 +3,8 @@
     "system": {
       "router": {
         "Home": "首页",
+        "Menu": "菜单权限",
+        "Button ": "按钮权限",
         "SystemManagement": "系统管理",
         "MultiLevel": "多级菜单",
         "SecondMenu": "二级菜单",

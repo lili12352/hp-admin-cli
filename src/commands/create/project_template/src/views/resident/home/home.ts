@@ -1,4 +1,6 @@
+import { useUserInfoStore } from "@/store/modules/user";
 //#hook:hook_1
+const userInfoStore = useUserInfoStore();
 const styleIcon = {
   width: "80px",
   height: "80px",

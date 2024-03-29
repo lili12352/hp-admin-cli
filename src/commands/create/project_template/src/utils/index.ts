@@ -1,3 +1,5 @@
+import router from "@/router";
+import { DirectiveBinding } from "vue";
 /**
  * 获取css全局变量
  * @param {string} cssValueName css全局变量名
@@ -58,4 +60,21 @@ export const setLocalStorage = (keyName: string, value: Object): boolean => {
 export const delLocalStorage = (keyName: string, isAll: Boolean = false) => {
   if (isAll) localStorage.clear();
   localStorage.removeItem(keyName);
+};
+
+/**
+ * 验证权限
+ * 权限从当前路由下meta对象的permission中获取
+ */
+export const hasPermission = (el: any, binding: DirectiveBinding<any>) => {
+  const { arg, value } = binding;
+  const path = router.currentRoute.value.fullPath;
+  const routers = router.getRoutes();
+  const routerObj = routers.find((item) => item.path === path);
+  if (routerObj && routerObj.meta) {
+    const { permission } = routerObj.meta as { permission: Array<string> };
+    if (Object.prototype.toString.call(permission) !== "[object Array]") return;
+    const flag = permission.some((item) => item === arg || item === value);
+    if (!flag) el.parentNode.removeChild(el);
+  }
 };

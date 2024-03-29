@@ -42,12 +42,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     .then(async () => {
       const { data } = await userLoginApi(loginForm);
       const { userName, token, nickName } = data;
+      loadingFlag.value = false;
+      if (!token) {
+        return alert("测试账号 test 和admin ，密码任意字符");
+      }
       userInfoStore.login({
         userName,
         token,
         nickName,
       });
-      loadingFlag.value = false;
 
       router.push("/");
     })

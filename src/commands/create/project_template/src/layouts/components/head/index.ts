@@ -66,7 +66,7 @@ return {
     hook_2: {
       i18n: {
         HOOK: function () {
-          return `const title = menuSwitchesToLang(routerObj.meta.title as string);
+          return `const title = menuSwitchesToLang(routerObj.meta.title);
           breadcrumbList.value.push({
             path: routerObj.path,
             title: title,

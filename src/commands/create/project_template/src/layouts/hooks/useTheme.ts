@@ -18,7 +18,7 @@ const themeList = [
     value: "darkBlue",
   },
   {
-    name: "白色",
+    name: "蓝白",
     value: "light",
   },
   {

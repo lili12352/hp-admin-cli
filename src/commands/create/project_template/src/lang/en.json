@@ -3,6 +3,8 @@
     "system": {
       "router": {
         "Home": "Home",
+        "Menu": "Menu",
+        "Button ": "Button",
         "SystemManagement": "System management",
         "MultiLevel": "Multi-level",
         "SecondMenu": "Second menu",

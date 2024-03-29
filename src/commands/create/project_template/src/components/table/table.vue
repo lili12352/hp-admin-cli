@@ -11,10 +11,10 @@ return {
         return `<el-table :data="props.dataSource" v-bind="attrs">
       <el-table-column
         v-for="item in props.colums"
+        v-bind="item"
         :key="item.key"
         :prop="item.key"
         :label="item.title"
-        v-bind="item"
       >
         <template #default="scope">
           <slot :name="item.key" :row="scope.row">
@@ -25,7 +25,7 @@ return {
     </el-table>`;
       },
       antdv: function () {
-        return `<a-table :dataSource="props.dataSource" :columns="props.columns" />`;
+        return `<a-table :dataSource="props.dataSource" :columns="props.colums" />`;
       },
     },
   },

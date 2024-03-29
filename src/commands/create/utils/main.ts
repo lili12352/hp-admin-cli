@@ -59,6 +59,7 @@ import router from "@/router";
 import "@/router/protector";
 import "@/styles/index.scss";
 import { signSvgIcon } from "@/components/svgIcon/icon";
+import { hasPermission } from "@/utils/index";
 ${importPinia}
 ${importUi}
 ${importI18n}
@@ -69,6 +70,12 @@ app.use(router)${useI18n};
 ${useUi}
 router.isReady().then(() => {
   app.mount("#app");
+});
+//自定义按钮指令
+app.directive("auth", {
+  mounted(el, binding) {
+    hasPermission(el, binding);
+  },
 });
  `;
 };
