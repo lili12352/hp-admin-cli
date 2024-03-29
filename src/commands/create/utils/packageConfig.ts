@@ -22,7 +22,8 @@ const ui = (type) => {
       break;
     case "antdv":
       dependencies = `"ant-design-vue": "^4.1.2"`;
-      devDependencies = `fast-glob`;
+      devDependencies = `,
+      "fast-glob": "^3.3.2"`;
       break;
     default:
       return;

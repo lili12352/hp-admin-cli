@@ -58,7 +58,7 @@ return {
         `;
       },
       antdv: function ui_1() {
-        return `const openKeys = ref<string[]>([]);
+        return `const openKeys = ref([]);
         const getOpenKeys = (path) => {
           if (systemStore.isCollapse) return;
           const key = path.split("").reverse().join("");

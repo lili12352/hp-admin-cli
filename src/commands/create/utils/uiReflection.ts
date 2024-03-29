@@ -55,6 +55,12 @@ export const mappingData = {
     "el-dialog": {
       antdv: "a-modal",
     },
+    "el-select": {
+      antdv: "a-select",
+    },
+    "el-option": {
+      antdv: "a-option",
+    },
   },
   attributeMappings: {
     "el-menu": {
@@ -73,7 +79,7 @@ export const mappingData = {
             "selectedKeys",
             `"[${value
               .replace(/\"/g, "")
-              .replace(/\/n/g, "")}]" \n   :openKeys="openKeys" \n`,
+              .replace(/\/n/g, "")}]" \n   :openKeys="openKeys" \n`
           ),
       },
       "text-color": {
