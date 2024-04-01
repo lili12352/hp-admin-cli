@@ -7,7 +7,6 @@
 </template>
 <style lang="scss" scoped>
 .main-container {
-  padding: 10px;
   height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
