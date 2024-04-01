@@ -6,13 +6,20 @@ import isWhiteListPage from "@/config/white-list";
 import { type RouteRecordRaw } from "vue-router";
 import { getUserInfoApi } from "@/api/user";
 
+const layouts = import.meta.glob("../**/**.vue");
+const pages = [...Object.keys(layouts)];
+
 // 动态路由
 const asyncRouter = (routerList: RouterRes[]): RouteRecordRaw[] => {
   if (!routerList || routerList.length === 0) return [];
-  return routerList.map((r: RouterRes) => ({
+  // 路由过滤
+  const filterRouterList = routerList.filter((item) =>
+    pages.find((path) => path === item.component),
+  );
+  return filterRouterList.map((r: RouterRes) => ({
     path: r.path,
     name: r.name,
-    component: () => import(/* @vite-ignore */ r.component),
+    component: import(/* @vite-ignore */ r.component),
     children: asyncRouter(r.children),
     meta: JSON.parse(JSON.stringify(r.meta)),
   }));
@@ -23,8 +30,6 @@ router.beforeEach(async (to, _from, next) => {
   if (!userInfoStore.token) {
     // 判断是否在免登录的白名单内
     if (!isWhiteListPage(to.fullPath)) {
-      console.log("没登录");
-
       return next("/login");
     } else {
       return next();
@@ -37,12 +42,11 @@ router.beforeEach(async (to, _from, next) => {
     if (!userInfoStore.role) {
       const { data }: any = await getUserInfoApi();
       userInfoStore.setUserInfo(data.role, data.routerList);
-      console.log("获取信息", data);
       const systemStore = useSystemStore();
       const systemStoreWithOut = useSystemStoreWithOut();
       const routerRes = await userInfoStore.getUserInfo();
-      systemStoreWithOut.setRouterList(routerRes);
       const routerList = asyncRouter(routerRes) as RouteRecordRaw[];
+      systemStoreWithOut.setRouterList(routerList);
       routerList.forEach((item: RouteRecordRaw) => {
         // 注册动态路由
         const routerFn = router.addRoute("/", item);
@@ -50,10 +54,9 @@ router.beforeEach(async (to, _from, next) => {
       });
       return next(to.fullPath);
     }
-    next();
-  } catch {
-    console.log("错误");
-
+  } catch (err) {
+    throw new Error("路由错误" + err);
+  } finally {
     next();
   }
 });
