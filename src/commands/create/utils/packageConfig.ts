@@ -106,6 +106,15 @@ const echarts = (type) => {
     return "";
   }
 };
+const three3D = (type) => {
+  if (type) {
+    return `,
+    "@types/three": "^0.160.0",
+    "three": "^0.160.0"`;
+  } else {
+    return "";
+  }
+};
 
 export const createPackage = (answers) => {
   const { projectName } = answers;
@@ -129,7 +138,7 @@ export const createPackage = (answers) => {
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "axios": "^1.6.7",
-    ${ui(answers.ui).dependencies}${i18n(answers.i18n)}${echarts(answers.echarts)}
+    ${ui(answers.ui).dependencies}${i18n(answers.i18n)}${echarts(answers.echarts)}${three3D(answers.three)}
   },
   "devDependencies": {
     "vite-plugin-svg-icons": "^2.0.1",

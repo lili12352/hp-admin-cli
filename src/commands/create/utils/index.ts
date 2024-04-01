@@ -91,7 +91,6 @@ export const questionsList = [
       {
         name: "three.js",
         value: "three",
-        disabled: "three.js正在开发中",
       },
     ],
     default: ["echarts"],

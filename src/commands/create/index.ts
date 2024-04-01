@@ -203,17 +203,27 @@ const readFileList = async (path, answers) => {
   return fileList;
 };
 
-const isCopyFile = (answers, file) => {
+const isCopyFile = (answers, filePath: string) => {
+  const file = filePath.substring(filePath.indexOf("src"), filePath.length);
   const { variant } = answers;
   const filePostfix = variant === "TypeScript" ? ".ts" : ".js";
   const modelFile = {
-    echarts: [`userEcharts${filePostfix}`],
+    echarts: [join("src", "hooks", `userEcharts${filePostfix}`)],
     i18n: [
-      `useI18${filePostfix}`,
-      "en.json",
-      "zh-CN.json",
-      `lang${filePostfix}`,
-      `useLang${filePostfix}`,
+      join("src", "hooks", `useI18${filePostfix}`),
+      join("src", "lang", "en.json"),
+      join("src", "lang", "zh-CN.json"),
+      join("src", "lang", `lang${filePostfix}`),
+      join("src", "layouts", "hooks", `useLang${filePostfix}`),
+    ],
+    three: [
+      join("src", "utils", "three", `index${filePostfix}`),
+      join("src", "utils", "three", `ModelThree${filePostfix}`),
+      join("src", "utils", "three", `SpriteThree${filePostfix}`),
+      join("src", "utils", "three", `Three${filePostfix}`),
+      join("src", "utils", "three", "indexdb", `index${filePostfix}`),
+      join("src", "utils", "three", "interface", `index${filePostfix}`),
+      join("src", "utils", "three", "utils", `index${filePostfix}`),
     ],
   };
   let flag = true;
@@ -244,7 +254,8 @@ const fileWrite = (path, files, projectName, templatePath, answers) => {
         filedir.split(templatePath)[1],
       );
       // 根据模块判断是否需要复制
-      if (isCopyFile(answers, dirent.name)) {
+
+      if (isCopyFile(answers, targetPath)) {
         fs.copyFile(filedir, targetPath);
       }
     });
@@ -260,24 +271,44 @@ const fileWrite = (path, files, projectName, templatePath, answers) => {
       if (vueFileNameList.includes(fileName)) {
         // vue文件写入
         if (extname(item.name) === ".vue") {
-          const convertVue = new ConvertVue({
-            path,
-            fileName,
-            answers,
-            model: ["hook_1"],
-          });
-          const vueFile = await convertVue.init();
-          fs.outputFileSync(targetPath, vueFile);
+          // 判断vue文件是否需要写入
+          const flag = writeVueFile(answers, targetPath);
+          if (flag) {
+            const convertVue = new ConvertVue({
+              path,
+              fileName,
+              answers,
+              model: ["hook_1"],
+            });
+            const vueFile = await convertVue.init();
+            fs.outputFileSync(targetPath, vueFile);
+          }
         }
       } else {
         // 其他文件复制
         // 根据模块判断是否需要复制
-        if (isCopyFile(answers, item.name)) {
+        if (isCopyFile(answers, targetPath)) {
           fs.copyFile(filedir, targetPath);
         }
       }
     });
   }
+};
+
+const writeVueFile = (answers, filePath: string) => {
+  const file = filePath.substring(filePath.indexOf("src"), filePath.length);
+  const modelFile = {
+    three: [join("src", "views", "three", `three.vue`)],
+  };
+  let flag = true;
+  for (const [key, value] of Object.entries(modelFile)) {
+    if (!value.includes(file)) continue;
+    if (typeof answers[key] === "boolean" && !answers[key]) {
+      flag = false;
+      return false;
+    }
+  }
+  return flag;
 };
 
 const action = (projectName: string) => {
