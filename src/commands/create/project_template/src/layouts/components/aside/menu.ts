@@ -13,7 +13,7 @@ const props = defineProps({
 });
 const addTabBar = (path: string) => {
   const routerList = router.getRoutes();
-  const tab = routerList.find((item: any) => item.path === path);
+  const tab = routerList.find((item) => item.path === path);
   if (!tab) return;
   //#hook:hook_2
   systemStore.addTabBar({

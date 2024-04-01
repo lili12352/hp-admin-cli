@@ -18,7 +18,7 @@ interface State {
 export const useSystemStore = defineStore({
   id: "system",
   state: (): State => ({
-    lang: "",
+    lang: "zhCN",
     themeValue: "normal",
     isCollapse: false,
     removeRouterList: [],
@@ -35,6 +35,8 @@ export const useSystemStore = defineStore({
       this.lang = lang;
     },
     addTabBar(tab: TabBar) {
+      console.log("============================", tab.path);
+
       const find = this.tabBarList.find(
         (item: TabBar) => item.path === tab.path,
       );

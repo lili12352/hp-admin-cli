@@ -37,7 +37,8 @@ const getLangKey = (
   }
 };
 
-const menuSwitchesToLang = (findValue: string) => {
+const menuSwitchesToLang = (findValue: string | unknown) => {
+  if (!findValue || typeof findValue !== "string") return "";
   const get = getLangKey(langJSON, findValue, "");
   return get ? get : findValue;
 };
