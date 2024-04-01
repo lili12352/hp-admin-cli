@@ -3,6 +3,8 @@
     "system": {
       "router": {
         "Home": "首页",
+        "OutLink": "外链",
+        "Three": "three",
         "Menu": "菜单权限",
         "Button ": "按钮权限",
         "SystemManagement": "系统管理",

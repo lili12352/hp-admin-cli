@@ -23,20 +23,13 @@ export const useSystemStore = defineStore({
     isCollapse: false,
     removeRouterList: [],
     routerList: [],
-    tabBarList: [
-      {
-        path: "/home",
-        name: "首页",
-      },
-    ],
+    tabBarList: [],
   }),
   actions: {
     setLang(lang: any) {
       this.lang = lang;
     },
     addTabBar(tab: TabBar) {
-      console.log("============================", tab.path);
-
       const find = this.tabBarList.find(
         (item: TabBar) => item.path === tab.path,
       );

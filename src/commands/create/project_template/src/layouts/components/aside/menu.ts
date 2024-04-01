@@ -11,6 +11,7 @@ const props = defineProps({
     required: true,
   },
 });
+
 const addTabBar = (path: string) => {
   const routerList = router.getRoutes();
   const tab = routerList.find((item) => item.path === path);
@@ -21,6 +22,7 @@ const addTabBar = (path: string) => {
     //#hook:hook_3
   });
 };
+addTabBar("/home");
 //#slot:ui_2
 const defaultActive = ref(router.currentRoute.value.fullPath);
 
