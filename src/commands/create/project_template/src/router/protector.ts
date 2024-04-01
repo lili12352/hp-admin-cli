@@ -14,15 +14,43 @@ const asyncRouter = (routerList: RouterRes[]): RouteRecordRaw[] => {
   if (!routerList || routerList.length === 0) return [];
   // 路由过滤
   const filterRouterList = routerList.filter((item) =>
-    pages.find((path) => path === item.component),
+    pages.find(
+      (path) =>
+        path === item.component || item.component.indexOf("https") !== -1,
+    ),
   );
   return filterRouterList.map((r: RouterRes) => ({
     path: r.path,
     name: r.name,
-    component: import(/* @vite-ignore */ r.component),
+    component:
+      r.component.indexOf("https") === -1
+        ? () => import(/* @vite-ignore */ r.component)
+        : null,
     children: asyncRouter(r.children),
     meta: JSON.parse(JSON.stringify(r.meta)),
   }));
+};
+
+//动态添加路由
+const addRouter = async (userInfoStore: any) => {
+  const { data }: any = await getUserInfoApi();
+  userInfoStore.setUserInfo(data.role, data.routerList);
+  const systemStore = useSystemStore();
+  const systemStoreWithOut = useSystemStoreWithOut();
+  const routerRes = await userInfoStore.getUserInfo();
+  const routerList = asyncRouter(routerRes) as RouteRecordRaw[];
+  systemStoreWithOut.setRouterList(routerList);
+  routerList.forEach((item: RouteRecordRaw) => {
+    // 注册动态路由
+    if (!item.component) return;
+    let routerFn;
+    if (item.meta && item.meta.ifFull) {
+      routerFn = router.addRoute(item);
+    } else {
+      routerFn = router.addRoute("/", item);
+    }
+    systemStore.addRemoveRouterList(routerFn);
+  });
 };
 
 router.beforeEach(async (to, _from, next) => {
@@ -40,23 +68,12 @@ router.beforeEach(async (to, _from, next) => {
   }
   try {
     if (!userInfoStore.role) {
-      const { data }: any = await getUserInfoApi();
-      userInfoStore.setUserInfo(data.role, data.routerList);
-      const systemStore = useSystemStore();
-      const systemStoreWithOut = useSystemStoreWithOut();
-      const routerRes = await userInfoStore.getUserInfo();
-      const routerList = asyncRouter(routerRes) as RouteRecordRaw[];
-      systemStoreWithOut.setRouterList(routerList);
-      routerList.forEach((item: RouteRecordRaw) => {
-        // 注册动态路由
-        const routerFn = router.addRoute("/", item);
-        systemStore.addRemoveRouterList(routerFn);
-      });
+      await addRouter(userInfoStore);
       return next(to.fullPath);
     }
-  } catch (err) {
-    throw new Error("路由错误" + err);
-  } finally {
     next();
+  } catch (err) {
+    next();
+    throw new Error("路由错误" + err);
   }
 });

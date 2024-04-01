@@ -42,8 +42,9 @@ return {
     ui_2: {
       element: function ui_1() {
         return `const select = (v) => {
-          router.push(v);
+          v.indexOf("https") === -1 ? router.push(v) : window.open(v);
           addTabBar(v);
+          
         };
         const textColor = ref("");
         const backgroundColor = ref("");
@@ -86,7 +87,7 @@ return {
         const select = (v) => {
           defaultActive.value = v.key;
           getOpenKeys(v.key);
-          router.push(v.key);
+          v.key.indexOf("https") === -1 ? router.push(v.key) : window.open(v.key);
           addTabBar(v.key);
         };`;
       },
