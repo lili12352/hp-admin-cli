@@ -53,12 +53,7 @@ export const useSystemStore = defineStore({
     resetSystem() {
       this.removeRouterList.forEach((item: Function) => item());
       this.removeRouterList = [];
-      this.tabBarList = [
-        {
-          path: "/home",
-          name: "首页",
-        },
-      ];
+      this.tabBarList = [];
     },
     setRouterList(routerList: any) {
       this.routerList = routerList;

@@ -7,6 +7,9 @@
       width: 50px;
       height: 50px;
     }
+    a {
+      cursor: not-allowed;
+    }
     .breadcrumb {
       color: var(--them-head-font-color);
     }
